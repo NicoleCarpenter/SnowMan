@@ -1,7 +1,8 @@
 import Swiftest
 
 Swiftest.register([
-  TestSpec.self
+  GameSpec.self
+  ViewSpec.self
 ])
 
 try Swiftest.run()
