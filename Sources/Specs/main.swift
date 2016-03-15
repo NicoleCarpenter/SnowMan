@@ -1,7 +1,8 @@
 import Swiftest
 
 Swiftest.register([
-  GameSpec.self
+  GameSpec.self,
+  DictionaryManagerSpec.self
 ])
 
 try Swiftest.run()

@@ -6,11 +6,6 @@ class GameSpec: Swiftest.Spec {
     	describe("#getRandomWord") {
     		let game = Game()
 
-    		it("returns a word from the dictionary") {
-    			let words = ["dance", "skip", "jump", "shark", "chicken", "alligator"]
-    			let word = game.getRandomWord()
-    			expect(words).to.contain(word)
-    		}
     	}
 
   	}
