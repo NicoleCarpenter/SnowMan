@@ -5,7 +5,7 @@ class DictionaryManagerSpec: Swiftest.Spec {
   	let spec = describe("dictionary logic") {
         let dm = DictionaryManager()
 
-        describe("#getRandomNumber") {
+        describe("#getRandomIndex") {
             it("returns a random number through dictionary length") {
                 let index = dm.getRandomIndex()
                 expect(index).to.beLessThan(words.count)
