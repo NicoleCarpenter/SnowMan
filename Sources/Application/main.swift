@@ -3,5 +3,3 @@ import Dictionary
 
 let dictionary = DictionaryManager() 
 let game = Game(dictionary: dictionary)
-
-print(game.getWord())
