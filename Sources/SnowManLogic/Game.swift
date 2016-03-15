@@ -1,5 +1,3 @@
-import OS
-
 public class Game {
 
 	public init() {
