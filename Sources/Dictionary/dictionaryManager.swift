@@ -13,7 +13,7 @@ public class DictionaryManager {
 	}
 
 	public func getRandomWord() -> String {
-		let index = self.getRandomIndex()
+		let index = getRandomIndex()
 		return gameWords[index]
 	}
 }
