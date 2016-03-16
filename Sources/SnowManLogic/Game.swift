@@ -25,4 +25,12 @@ public class Game {
 		}
 	}
 
+	public func checkForGuessInWord(guess: Character, gameWord: String) -> Bool {
+		if (gameWord.lowercaseString.characters.contains(guess)) {
+			return true
+		} else {
+			return false
+		}
+	}
+
 }

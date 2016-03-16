@@ -27,5 +27,19 @@ class GameSpec: Swiftest.Spec {
     			expect(game.checkIfGuessingFullWord(guess)).to.equal(false)
     		}
     	}
+
+    	describe("#checkForGuessInWord") {
+    		it("should return true if the letter is in the word") {
+    			let guess: Character = "a"
+    			let gameWord = "apple"
+    			expect(game.checkForGuessInWord(guess, gameWord: gameWord)).to.equal(true)
+    		}
+
+			it("should return false if the letter is not in the word") {
+    			let guess: Character = "b"
+    			let gameWord = "apple"
+    			expect(game.checkForGuessInWord(guess, gameWord: gameWord)).to.equal(false)
+    		}    		
+    	}
   	}
 }
