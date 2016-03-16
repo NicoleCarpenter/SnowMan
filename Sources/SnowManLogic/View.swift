@@ -20,4 +20,7 @@ public class View {
    		print(blanks.joinWithSeparator(" "))
 	}
 
+	public func getUserInput() -> String {
+		return String(readLine(stripNewline: true))
+	}
 }

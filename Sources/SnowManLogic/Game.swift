@@ -16,4 +16,13 @@ public class Game {
 		gameWord = dictionary.getRandomWord()
 		return gameWord
 	}
+
+	public func checkIfGuessingFullWord(guess: String) -> Bool {
+		if (guess.characters.count > 1) {
+			return true
+		} else {
+			return false
+		}
+	}
+
 }

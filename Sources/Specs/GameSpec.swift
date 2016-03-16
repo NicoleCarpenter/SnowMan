@@ -15,5 +15,17 @@ class GameSpec: Swiftest.Spec {
     			expect(gameWords).to.contain(word)
     		}
     	}
+
+    	describe("#checkIfGuessingFullWord") {
+    		it("should return true if guessing the word") {
+    			let guess = "word"
+    			expect(game.checkIfGuessingFullWord(guess)).to.equal(true)
+    		}
+
+    		it("should return false if guessing a letter") {
+    			let guess = "p"
+    			expect(game.checkIfGuessingFullWord(guess)).to.equal(false)
+    		}
+    	}
   	}
 }
