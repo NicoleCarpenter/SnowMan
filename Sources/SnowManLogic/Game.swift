@@ -5,6 +5,7 @@ public class Game {
 	let view: View
 
 	var correctGuesses: [String] = []
+	var wrongGuesses: [String] = []
 	var gameWord: String = ""
 
 	public init(dictionary: DictionaryManager, view: View) {
@@ -32,5 +33,4 @@ public class Game {
 			return false
 		}
 	}
-
 }

@@ -39,7 +39,7 @@ class GameSpec: Swiftest.Spec {
     			let guess: Character = "b"
     			let gameWord = "apple"
     			expect(game.checkForGuessInWord(guess, gameWord: gameWord)).to.equal(false)
-    		}    		
+    		}    
     	}
   	}
 }
