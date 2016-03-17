@@ -2,8 +2,7 @@ import Swiftest
 
 Swiftest.register([
   	GameSpec.self,
-  	DictionaryManagerSpec.self, 
-  	ViewSpec.self
+  	DictionaryManagerSpec.self
 ])
 
 try Swiftest.run()

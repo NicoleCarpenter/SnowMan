@@ -17,5 +17,11 @@ class GameSpec: Swiftest.Spec {
 			    expect(game.checkForGuessInWord(guess)).to.equal(false)
         	}    
         }
+
+        describe("#separateLetters") {
+            it("should return an array of the letters in the word") {
+                expect(game.separateLetters()).to.equal(["a", "p", "p", "l", "e"])
+            }
+        }
   	}
 }

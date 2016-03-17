@@ -1,6 +1,4 @@
 public class Game {
-	var correctGuesses: [String] = []
-	var wrongGuesses: [String] = []
 	var word: String
 
 	public init(word: String) {
@@ -13,5 +11,9 @@ public class Game {
 		} else {
 			return false
 		}
+	}
+
+	public func separateLetters() -> [String] {
+		return word.characters.map { String($0) }
 	}
 }
