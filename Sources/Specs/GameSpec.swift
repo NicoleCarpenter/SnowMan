@@ -3,7 +3,7 @@ import Swiftest
 
 class GameSpec: Swiftest.Spec {
   	let spec = describe("game logic") {
-        let guessManager = GuessManager()
+        let guessManager = GuessManager(totalIncorrectGuessesAllowed: 10)
         let word = "apple"
         let game = Game(word: word, guessManager: guessManager)
 
