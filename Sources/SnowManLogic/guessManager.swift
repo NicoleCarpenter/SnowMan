@@ -16,4 +16,14 @@ public class GuessManager {
 	public func calculateRemainingGuesses() -> Int {
 		return totalIncorrectGuessesAllowed - incorrectGuesses.count
 	}
+
+	public func noGuessesRemaining() -> Bool {
+		let remainingGuesses = calculateRemainingGuesses()
+		print(remainingGuesses)
+		if (remainingGuesses <= 0) {
+			return true
+		} else {
+			return false
+		}
+	}
 }
