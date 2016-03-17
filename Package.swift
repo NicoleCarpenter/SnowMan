@@ -4,8 +4,8 @@ let package = Package(
   	name: "SnowMan",
   	targets: [
   		Target(name: "Dictionary"),
-  		Target(name: "SnowManLogic", dependencies: ["Dictionary"]),
- 		Target(name: "Application", dependencies: ["SnowManLogic"]),
+  		Target(name: "SnowManLogic"),
+ 		Target(name: "Application", dependencies: ["SnowManLogic", "Dictionary"]),
  		Target(name: "Specs", dependencies: ["SnowManLogic", "Dictionary"]),
   	],
   	dependencies: [

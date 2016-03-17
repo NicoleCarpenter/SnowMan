@@ -23,5 +23,11 @@ class GameSpec: Swiftest.Spec {
                 expect(game.separateLetters()).to.equal(["a", "p", "p", "l", "e"])
             }
         }
+
+        describe("#findUnguessedLetters") {
+            it("should return an array of letters in the word that have not been guessed") {
+                expect(game.findUnguessedLetters()).to.equal(["a", "p", "dl", "e"])
+            }
+        }
   	}
 }
