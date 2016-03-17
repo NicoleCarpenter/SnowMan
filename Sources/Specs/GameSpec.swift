@@ -4,7 +4,9 @@ import Swiftest
 class GameSpec: Swiftest.Spec {
   	let spec = describe("game logic") {
         let word = "apple"
-		let game = Game(word: word)
+        let guessManager = GuessManager()
+        let game = Game(word: word, guessManager: guessManager)
+        let correctGuesses = ["a", "p"]
 
         describe("#checkForGuessInWord") {
           	it("should return true if the letter is in the word") {
@@ -21,12 +23,6 @@ class GameSpec: Swiftest.Spec {
         describe("#separateLetters") {
             it("should return an array of the letters in the word") {
                 expect(game.separateLetters()).to.equal(["a", "p", "p", "l", "e"])
-            }
-        }
-
-        describe("#findUnguessedLetters") {
-            it("should return an array of letters in the word that have not been guessed") {
-                expect(game.findUnguessedLetters()).to.equal(["a", "p", "dl", "e"])
             }
         }
   	}
