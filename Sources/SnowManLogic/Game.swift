@@ -29,5 +29,15 @@ public class Game {
 		}
 	}
 
+	public func gameOver() -> Bool {
+		let noGuessesRemaining = guessManager.noGuessesRemaining()
+		let winner = isWinner()
+		if (noGuessesRemaining || winner) {
+			return true 
+		} else {
+			return false
+		}
+	}
+
 	
 }
