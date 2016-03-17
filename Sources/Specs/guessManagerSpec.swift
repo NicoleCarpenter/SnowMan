@@ -40,5 +40,18 @@ class GuessManagerSpec: Swiftest.Spec {
                 expect(guessManager.calculateRemainingGuesses()).to.equal(-1)
             }
         }
+
+        describe("#noGuessesRemaining") {
+            guessManager.totalIncorrectGuessesAllowed = 5
+            it("should return true if no guesses remain") {
+                guessManager.incorrectGuesses = ["c", "b", "d", "f", "g"]
+                expect(guessManager.noGuessesRemaining()).to.equal(true)
+            }
+
+            it("should return false if there are still remaining guesses") {
+                guessManager.incorrectGuesses = ["c"]
+                expect(guessManager.noGuessesRemaining()).to.equal(false)
+            }
+        }
   	}
 }

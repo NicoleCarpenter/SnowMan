@@ -19,7 +19,6 @@ public class GuessManager {
 
 	public func noGuessesRemaining() -> Bool {
 		let remainingGuesses = calculateRemainingGuesses()
-		print(remainingGuesses)
 		if (remainingGuesses <= 0) {
 			return true
 		} else {
