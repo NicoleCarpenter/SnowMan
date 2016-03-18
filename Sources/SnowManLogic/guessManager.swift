@@ -2,6 +2,7 @@ public class GuessManager {
 	public var totalIncorrectGuessesAllowed: Int
 	public var correctGuesses: [String] = []
 	public var incorrectGuesses: [String] = []
+	public var currentGuess: String = ""
 
 	public init (totalIncorrectGuessesAllowed: Int) {
 		self.totalIncorrectGuessesAllowed = totalIncorrectGuessesAllowed
