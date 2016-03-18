@@ -2,7 +2,6 @@ public class GuessManager {
 	public var totalIncorrectGuessesAllowed: Int
 	public var correctGuesses: [String] = []
 	public var incorrectGuesses: [String] = []
-	public var currentGuess: String = ""
 
 	public init (totalIncorrectGuessesAllowed: Int) {
 		self.totalIncorrectGuessesAllowed = totalIncorrectGuessesAllowed
@@ -20,10 +19,6 @@ public class GuessManager {
 
 	public func noGuessesRemaining() -> Bool {
 		let remainingGuesses = calculateRemainingGuesses()
-		if (remainingGuesses <= 0) {
-			return true
-		} else {
-			return false
-		}
+		return remainingGuesses <= 0
 	}
 }

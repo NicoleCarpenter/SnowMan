@@ -8,11 +8,7 @@ public class Game {
 	}
 
 	public func checkForGuessInWord(guess: Character) -> Bool {
-		if (word.lowercaseString.characters.contains(guess)) {
-			return true
-		} else {
-			return false
-		}
+		return word.lowercaseString.characters.contains(guess)
 	}
 
 	public func separateLetters() -> [String] {
@@ -22,22 +18,12 @@ public class Game {
 	public func isWinner() -> Bool {
 		let letters = separateLetters()
 		let unguessedLetters = guessManager.findUnguessedLetters(letters)
-		if (unguessedLetters.isEmpty) {
-			return true
-		} else {
-			return false
-		}
+		return unguessedLetters.isEmpty
 	}
 
 	public func gameOver() -> Bool {
 		let noGuessesRemaining = guessManager.noGuessesRemaining()
 		let winner = isWinner()
-		if (noGuessesRemaining || winner) {
-			return true 
-		} else {
-			return false
-		}
+		return noGuessesRemaining || winner
 	}
-
-	
 }

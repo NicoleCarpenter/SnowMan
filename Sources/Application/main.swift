@@ -1,8 +1,8 @@
 import SnowManLogic
 import Dictionary
 
-let dictionary = DictionaryManager() 
+let dictionaryManager = DictionaryManager() 
 let guessManager = GuessManager(totalIncorrectGuessesAllowed: 10)
-let word = dictionary.getRandomWord()
+let word = dictionaryManager.getRandomWord()
 
 let game = Game(word: word, guessManager: guessManager)
