@@ -13,11 +13,11 @@ class DictionaryManagerSpec: Swiftest.Spec {
         }
 
         describe("#getRandomWord") {
-    		it("returns a random word from the dictionary") {
-                let gameWords = words
-    			let word = dm.getRandomWord()
-    			expect(gameWords).to.contain(word)
-    		}
+        		it("returns a random word from the dictionary") {
+                    let gameWords = words
+        			let word = dm.getRandomWord()
+        			expect(gameWords).to.contain(word)
+        		}
         }
   	}
 }
