@@ -3,10 +3,10 @@ import Swiftest
 
 class DictionaryManagerSpec: Swiftest.Spec {
 	let spec = describe("dictionary logic") {
-	var dictionaryManager: DictionaryManager!
-	before() {
-		dictionaryManager = DictionaryManager()
-	}
+		var dictionaryManager: DictionaryManager!
+		before() {
+			dictionaryManager = DictionaryManager()
+		}
 
 		describe("#getRandomWord") {
 			var gameWords: [String]!

@@ -7,6 +7,7 @@ class ViewSpec: Swiftest.Spec {
   		before() {
   			view = View()
   		}
+  		
   		describe("#getUserInput") {
   			it("should return the user input") {
   				
