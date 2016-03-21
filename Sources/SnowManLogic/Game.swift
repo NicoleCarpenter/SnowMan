@@ -11,10 +11,6 @@ public class Game {
 		return word.lowercaseString.characters.contains(guess)
 	}
 
-	public func separateLetters() -> [String] {
-		return word.characters.map { String($0) }
-	}
-
 	public func isWinner() -> Bool {
 		let letters = separateLetters()
 		let unguessedLetters = guessManager.findUnguessedLetters(letters)
@@ -22,8 +18,10 @@ public class Game {
 	}
 
 	public func gameOver() -> Bool {
-		let noGuessesRemaining = guessManager.noGuessesRemaining()
-		let winner = isWinner()
-		return noGuessesRemaining || winner
+		return guessManager.noGuessesRemaining() || isWinner()
+	}
+
+	private func separateLetters() -> [String] {
+		return word.characters.map { String($0) }
 	}
 }

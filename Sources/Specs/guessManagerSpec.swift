@@ -3,7 +3,10 @@ import Swiftest
 
 class GuessManagerSpec: Swiftest.Spec {
   	let spec = describe("guess logic") {
-        	let guessManager = GuessManager(totalIncorrectGuessesAllowed: 10)
+            var guessManager: GuessManager!
+            before() {
+            	guessManager = GuessManager(totalIncorrectGuessesAllowed: 5)
+            }
         
         	describe("#findUnguessedLetters") {
         		let letters = ["a", "p", "l", "e"]
@@ -24,7 +27,6 @@ class GuessManagerSpec: Swiftest.Spec {
         	}
 
         	describe("#calculateRemainingGuesses") {
-        		guessManager.totalIncorrectGuessesAllowed = 5
         		it("should return the number of guesses allowed if no incorrect guesses have been made") {
         			guessManager.incorrectGuesses = []
         			expect(guessManager.calculateRemainingGuesses()).to.equal(5)
@@ -42,7 +44,6 @@ class GuessManagerSpec: Swiftest.Spec {
         	}
 
         	describe("#noGuessesRemaining") {
-        		guessManager.totalIncorrectGuessesAllowed = 5
         		it("should return true if no guesses remain") {
         			guessManager.incorrectGuesses = ["c", "b", "d", "f", "g"]
         			expect(guessManager.noGuessesRemaining()).to.equal(true)

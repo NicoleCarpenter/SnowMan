@@ -3,9 +3,14 @@ import Swiftest
 
 class GameSpec: Swiftest.Spec {
 	let spec = describe("game logic") {
-		let guessManager = GuessManager(totalIncorrectGuessesAllowed: 10)
-		let word = "apple"
-		let game = Game(word: word, guessManager: guessManager)
+		var guessManager: GuessManager!
+		var word: String!
+		var game: Game!
+		before() {
+			guessManager =  GuessManager(totalIncorrectGuessesAllowed: 5)
+			word = "apple"
+			game = Game(word: word, guessManager: guessManager)
+		}
 
 		describe("#checkForGuessInWord") {
 			it("should return true if the letter is in the word") {
@@ -17,12 +22,6 @@ class GameSpec: Swiftest.Spec {
 				let guess: Character = "b"
 				expect(game.checkForGuessInWord(guess)).to.equal(false)
 			}    
-		}
-
-		describe("#separateLetters") {
-			it("should return an array of the letters in the word") {
-				expect(game.separateLetters()).to.equal(["a", "p", "p", "l", "e"])
-			}
 		}
 
 		describe("#isWinner") {
@@ -38,7 +37,6 @@ class GameSpec: Swiftest.Spec {
 		}
 
 		describe("#gameOver") {
-			guessManager.totalIncorrectGuessesAllowed = 5
 			it( "should return true if winning conditions are met") {
 				guessManager.correctGuesses = ["a", "p", "l", "e"]
 				expect(game.gameOver()).to.equal(true)
