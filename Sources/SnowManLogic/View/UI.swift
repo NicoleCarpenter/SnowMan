@@ -1,4 +1,7 @@
-public class UI: Viewable {
+public class UI: Receivable {
+	public init() {
+	}
+
 	public func getUserInput() -> String {
 		return String(readLine(stripNewline: true) ?? "")
 	}

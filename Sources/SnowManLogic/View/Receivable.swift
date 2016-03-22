@@ -1,3 +1,3 @@
-public protocol Viewable {
+public protocol Receivable {
     func getUserInput() -> String
 }

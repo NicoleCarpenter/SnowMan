@@ -3,14 +3,14 @@ import Swiftest
 
 class UISpec: Swiftest.Spec {
   	let spec = describe("UI logic") {
-  		var view: MockUI!
+  		var ui: MockUI!
   		before() {
-  			view = MockUI()
+  			ui = MockUI()
   		}
   		
   		describe("#getUserInput") {
   			it("should return the user input") {
-  				expect(view.getUserInput()).to.equal("hello")
+  				expect(ui.getUserInput()).to.equal("hello")
   			}
   		}
   	}

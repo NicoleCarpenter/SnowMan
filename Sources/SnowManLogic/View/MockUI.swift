@@ -1,4 +1,4 @@
-public class MockUI: Viewable {
+public class MockUI: Receivable {
 	var getUserInputReturn = ""
 	public init() {}
 
