@@ -3,14 +3,14 @@ import Swiftest
 
 class ViewSpec: Swiftest.Spec {
   	let spec = describe("view logic") {
-  		var view: View!
+  		var view: MockView!
   		before() {
-  			view = View()
+  			view = MockView()
   		}
   		
   		describe("#getUserInput") {
   			it("should return the user input") {
-  				
+  				expect(view.getUserInput()).to.equal("hello")
   			}
   		}
   	}
