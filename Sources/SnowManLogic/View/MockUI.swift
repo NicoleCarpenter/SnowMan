@@ -1,4 +1,4 @@
-public class MockView: Viewable {
+public class MockUI: Viewable {
 	var getUserInputReturn = ""
 	public init() {}
 

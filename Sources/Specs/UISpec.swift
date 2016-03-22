@@ -1,11 +1,11 @@
 import SnowManLogic
 import Swiftest
 
-class ViewSpec: Swiftest.Spec {
-  	let spec = describe("view logic") {
-  		var view: MockView!
+class UISpec: Swiftest.Spec {
+  	let spec = describe("UI logic") {
+  		var view: MockUI!
   		before() {
-  			view = MockView()
+  			view = MockUI()
   		}
   		
   		describe("#getUserInput") {
