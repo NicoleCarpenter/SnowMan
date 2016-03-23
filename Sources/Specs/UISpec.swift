@@ -9,7 +9,8 @@ class UISpec: Swiftest.Spec {
   		}
   		
   		describe("#getUserInput") {
-  			it("should return the user input") {
+            it("should return the user input") {
+                ui.getUserInputReturn = "hello"
   				expect(ui.getUserInput()).to.equal("hello")
   			}
   		}

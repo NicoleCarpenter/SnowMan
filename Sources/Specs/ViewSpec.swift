@@ -3,18 +3,32 @@ import Swiftest
 
 class ViewSpec: Swiftest.Spec {
   	let spec = describe("view logic") {
-  		var ui: Receivable!
+  		var ui: MockUI!
   		var view: View!
-  		before() {
-  			ui = MockUI()
-  			view = View(ui: ui)
-  		}
-  		
-  		describe("#receiveGuess") {
-  			it("should return the guess if it is a letter or word") {
-  				expect(view.receiveGuess()).to.equal("hello")
-  			}
-		}
+        var mockView: MockView!
+        before() {
+            ui = MockUI()
+            view = View(ui: ui)
+            mockView = MockView(ui: ui)
+        }
+        
+        describe("#receiveGuess") {
+            it("should return the user input if it is a string of letters") {
+                ui.getUserInputReturn = "hello"
+                expect(view.receiveGuess()).to.equal("hello")
+            }
+
+            it("should return the user input if it is a single letter") {
+                ui.getUserInputReturn = "a"
+                expect(view.receiveGuess()).to.equal("a")
+            }
+
+            it("should return an error message if the user input is something other than a letter or word") {   
+                ui.getUserInputReturn = "1"
+                expect(mockView.receiveGuess()).to.equal("Invalid")
+            }
+
+        }
 
         describe("#assignBlanks") {
             var gameWord: String!
