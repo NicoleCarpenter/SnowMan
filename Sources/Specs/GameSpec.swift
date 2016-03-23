@@ -5,11 +5,16 @@ class GameSpec: Swiftest.Spec {
 	let spec = describe("game logic") {
 		var guessManager: GuessManager!
 		var word: String!
+		var ui: UI!
+		var view: Viewable!
 		var game: Game!
+
 		before() {
 			guessManager =  GuessManager(totalIncorrectGuessesAllowed: 5)
 			word = "apple"
-			game = Game(word: word, guessManager: guessManager)
+			ui = UI()
+			view = MockView(ui: ui)
+			game = Game(word: word, guessManager: guessManager, view: view)
 		}
 
 		describe("#checkForGuessInWord") {

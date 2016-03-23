@@ -1,4 +1,4 @@
-public class View {
+public class View: Viewable {
 	var ui: Receivable 
 	var guess = ""
 
@@ -18,7 +18,7 @@ public class View {
 	}
 
 	public func assignBlanks(gameWord: String, correctGuesses: [String]) -> String {
-		var blanks : [String] = []
+		var blanks: [String] = []
 		let letters = gameWord.characters.map { String($0) }
 		
 		for letter in letters { 
@@ -28,7 +28,9 @@ public class View {
            		blanks.append("__ ") 
        		} 
    		}
-   		return blanks.joinWithSeparator(" ")
+   		let assignedBlanks = blanks.joinWithSeparator(" ")
+   		ui.display(assignedBlanks)
+   		return assignedBlanks
 	}
 
 	private func containsOnlyLetters(input: String) -> Bool {
