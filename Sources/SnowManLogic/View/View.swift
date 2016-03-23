@@ -17,8 +17,18 @@ public class View {
 		return guess
 	}
 
-	public func determineBlanksNeeded(gameWord: String) -> Int {
-		return gameWord.characters.count
+	public func assignBlanks(gameWord: String, correctGuesses: [String]) -> String {
+		var blanks : [String] = []
+		let letters = gameWord.characters.map { String($0) }
+		
+		for letter in letters { 
+			if (correctGuesses.contains(letter)) { 
+           		blanks.append(letter)  
+       		} else { 
+           		blanks.append("__ ") 
+       		} 
+   		}
+   		return blanks.joinWithSeparator(" ")
 	}
 
 	private func containsOnlyLetters(input: String) -> Bool {

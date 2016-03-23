@@ -16,14 +16,29 @@ class ViewSpec: Swiftest.Spec {
   			}
 		}
 
-        describe("#determineBlanksNeeded") {
+        describe("#assignBlanks") {
             var gameWord: String!
+            var correctGuesses: [String]!
+            
             before() {
-                gameWord = "alligator"
+                gameWord = "hello"
+                correctGuesses = []
             }
-            it("should return the number of blanks needed for the given word") {
-                expect(view.determineBlanksNeeded(gameWord)).to.equal(9)
+            
+            it("should return only blanks for unguessed word") {
+                expect(view.assignBlanks(gameWord, correctGuesses: correctGuesses)).to.equal("__  __  __  __  __ ")
             }
+
+            it("should return no blanks if the word has been guessed") {
+                correctGuesses = ["h", "e", "l", "o"]
+                expect(view.assignBlanks(gameWord, correctGuesses: correctGuesses)).to.equal("h e l l o")
+            }
+
+            it("should return blanks and letters for partially guessed word") {
+                correctGuesses = ["h", "e"]
+                expect(view.assignBlanks(gameWord, correctGuesses: correctGuesses)).to.equal("h e __  __  __ ")
+            }
+
         }
   	}
 }
