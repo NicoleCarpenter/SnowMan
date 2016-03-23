@@ -1,6 +1,6 @@
 public class View: Viewable {
 	var ui: Receivable 
-	var guess = ""
+	var guess: String!
 
 	public init(ui: Receivable) {
 		self.ui = ui

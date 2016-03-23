@@ -1,5 +1,5 @@
 public class MockUI: Receivable {
-	public var getUserInputReturn = ""
+	public var getUserInputReturn: String!
 
 	public init() {}
 
