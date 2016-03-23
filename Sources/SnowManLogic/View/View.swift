@@ -1,8 +1,20 @@
 public class View {
-	var ui: UI 
+	var ui: Receivable 
+	var guess = ""
 
-	public init(ui: UI) {
+	public init(ui: Receivable) {
 		self.ui = ui
+	}
+
+	public func receiveGuess() -> String {
+		guess = ui.getUserInput()
+		if (containsOnlyLetters(guess)) {
+			return guess
+		} else {
+			print("Invalid guess. Please enter a lowercase letter or word.")
+			receiveGuess()
+		}
+		return guess
 	}
 
 	private func containsOnlyLetters(input: String) -> Bool {
