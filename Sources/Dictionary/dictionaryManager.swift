@@ -1,7 +1,7 @@
 import OS
 
 public class DictionaryManager {
-	let gameWords = words
+	public let gameWords = words
 
 	public init() {
 	}

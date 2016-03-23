@@ -18,16 +18,13 @@ class GameSpec: Swiftest.Spec {
 		}
 
 		describe("#checkForGuessInWord") {
-			var guess: Character!
-			before() {
-				guess = "a"
-			}
 			it("should return true if the letter is in the word") {
+				let guess: Character = "a"
 				expect(game.checkForGuessInWord(guess)).to.equal(true)
 			}
 
 			it("should return false if the letter is not in the word") {
-				guess = "b"
+				let guess: Character = "b"
 				expect(game.checkForGuessInWord(guess)).to.equal(false)
 			}    
 		}

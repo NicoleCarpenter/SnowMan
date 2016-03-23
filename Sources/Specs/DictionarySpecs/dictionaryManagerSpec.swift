@@ -3,20 +3,11 @@ import Swiftest
 
 class DictionaryManagerSpec: Swiftest.Spec {
 	let spec = describe("dictionary logic") {
-		var dictionaryManager: DictionaryManager!
-		before() {
-			dictionaryManager = DictionaryManager()
-		}
-
 		describe("#getRandomWord") {
-			var gameWords: [String]!
-			var word: String!
-			before() {
-				gameWords = words
-				word = dictionaryManager.getRandomWord()
-			}
 			it("returns a random word from the dictionary") {
-				expect(gameWords).to.contain(word)
+				let dictionaryManager = DictionaryManager()
+				let word = dictionaryManager.getRandomWord()
+				expect(dictionaryManager.gameWords).to.contain(word)
 			}
 		}
 	}
