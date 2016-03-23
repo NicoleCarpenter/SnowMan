@@ -1,10 +1,12 @@
 public class GuessManager {
 	public var totalIncorrectGuessesAllowed: Int
-	public var correctGuesses: [String] = []
-	public var incorrectGuesses: [String] = []
+	public var correctGuesses: [String]
+	public var incorrectGuesses: [String]
 
 	public init (totalIncorrectGuessesAllowed: Int) {
 		self.totalIncorrectGuessesAllowed = totalIncorrectGuessesAllowed
+		correctGuesses = []
+		incorrectGuesses = []
 	}
 
 	public func findUnguessedLetters(letters: [String]) -> Set<String> {
