@@ -17,6 +17,10 @@ public class View {
 		return guess
 	}
 
+	public func determineBlanksNeeded(gameWord: String) -> Int {
+		return gameWord.characters.count
+	}
+
 	private func containsOnlyLetters(input: String) -> Bool {
    		for character in input.characters {
       		if (!(character >= "a" && character <= "z")) {

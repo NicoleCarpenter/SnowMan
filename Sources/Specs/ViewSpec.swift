@@ -10,10 +10,20 @@ class ViewSpec: Swiftest.Spec {
   			view = View(ui: ui)
   		}
   		
-  		describe("#reveiveGuess") {
+  		describe("#receiveGuess") {
   			it("should return the guess if it is a letter or word") {
   				expect(view.receiveGuess()).to.equal("hello")
   			}
 		}
+
+        describe("#determineBlanksNeeded") {
+            var gameWord: String!
+            before() {
+                gameWord = "alligator"
+            }
+            it("should return the number of blanks needed for the given word") {
+                expect(view.determineBlanksNeeded(gameWord)).to.equal(9)
+            }
+        }
   	}
 }
