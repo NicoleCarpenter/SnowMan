@@ -9,7 +9,7 @@ public class Game {
 		self.view = view
 	}
 
-	public func guessIsInWord(guess: Character) -> Bool {
+	public func hasGuessInWord(guess: Character) -> Bool {
 		return word.lowercaseString.characters.contains(guess)
 	}
 
@@ -19,7 +19,7 @@ public class Game {
 	}
 
 	public func gameIsOver() -> Bool {
-		return guessManager.outOfGuesses() || isWinner()
+		return guessManager.hasNoGuessesRemaining() || isWinner()
 	}
 	
 	private func separateLetters() -> [String] {

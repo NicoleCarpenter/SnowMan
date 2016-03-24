@@ -15,7 +15,7 @@ public class GuessManager {
 		return setLetters.subtract(setCorrectGuesses)
 	}
 
-	public func outOfGuesses() -> Bool {
+	public func hasNoGuessesRemaining() -> Bool {
 		let remainingGuesses = calculateRemainingGuesses()
 		return remainingGuesses <= 0
 	}

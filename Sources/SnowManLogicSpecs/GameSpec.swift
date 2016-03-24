@@ -17,15 +17,15 @@ class GameSpec: Swiftest.Spec {
 			game = Game(word: word, guessManager: guessManager, view: view)
 		}
 
-		describe("#guessIsInWord") {
+		describe("#hasGuessInWord") {
 			it("should return true if the letter is in the word") {
 				let guess: Character = "a"
-				expect(game.guessIsInWord(guess)).to.equal(true)
+				expect(game.hasGuessInWord(guess)).to.equal(true)
 			}
 
 			it("should return false if the letter is not in the word") {
 				let guess: Character = "b"
-				expect(game.guessIsInWord(guess)).to.equal(false)
+				expect(game.hasGuessInWord(guess)).to.equal(false)
 			}    
 		}
 
