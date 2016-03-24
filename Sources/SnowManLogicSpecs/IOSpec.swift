@@ -3,13 +3,13 @@ import Swiftest
 
 class IOSpec: Swiftest.Spec {
   	let spec = describe("IO logic") {
-  		var io: IO!
+  		var io: Receivable!
   		before() {
   			io = IO()
   		}
   		
-      // it("should return the user input") {
-      //   expect(io.getUserInput(mockReadLine("hello")).to.equal("hello"))
-      // }
+        it("should return the user input") {
+            // expect(io.getUserInput(io.myReadLine)).to.equal("hello")
+        }
   	}
 }
