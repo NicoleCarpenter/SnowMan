@@ -3,7 +3,7 @@ import Swiftest
 
 class ViewSpec: Swiftest.Spec {
   	let spec = describe("View logic") {
-  		var io: MockIO!
+		var io: MockIO!
         	var mockView: MockView!
 	        before() {
 			io = MockIO()
@@ -26,23 +26,23 @@ class ViewSpec: Swiftest.Spec {
                 		expect(mockView.receiveGuess()).to.equal("Invalid")
             		}
 
-                    it("should return an error message if the user input is a non-letter character") {
-                        io.stubbedUserInput = "?"
-                        expect(mockView.receiveGuess()).to.equal("Invalid")
-                    }
+                	it("should return an error message if the user input is a non-letter character") {
+                        	io.stubbedUserInput = "?"
+                        	expect(mockView.receiveGuess()).to.equal("Invalid")
+                    	}
 
-                    it("should return an error message if the user input is a combination of valid and invalid inputs") {
-                        io.stubbedUserInput = "?a"
-                        expect(mockView.receiveGuess()).to.equal("Invalid")
+                    	it("should return an error message if the user input is a combination of valid and invalid inputs") {
+                        	io.stubbedUserInput = "?a"
+                        	expect(mockView.receiveGuess()).to.equal("Invalid")
 
-                        io.stubbedUserInput = "6a"
-                        expect(mockView.receiveGuess()).to.equal("Invalid")
-                    }
+                        	io.stubbedUserInput = "6a"
+                        	expect(mockView.receiveGuess()).to.equal("Invalid")
+                    	}
 
-                    it("should return an error message if the user hits return") {
-                        io.stubbedUserInput = ""
-                        expect(mockView.receiveGuess()).to.equal("Invalid")
-                    }
+                    	it("should return an error message if the user hits return") {
+                        	io.stubbedUserInput = ""
+                        	expect(mockView.receiveGuess()).to.equal("Invalid")
+                    	}
         	}
 
         	describe("#assignBlanks") {

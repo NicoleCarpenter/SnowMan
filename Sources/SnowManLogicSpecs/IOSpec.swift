@@ -8,8 +8,8 @@ class IOSpec: Swiftest.Spec {
   			io = IO()
   		}
   		
-        it("should return the user input") {
-            // expect(io.getUserInput(io.myReadLine)).to.equal("hello")
-        }
+	        it("should return the user input") {
+        		// expect(io.getUserInput(io.myReadLine)).to.equal("hello")
+        	}
   	}
 }
