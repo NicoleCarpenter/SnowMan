@@ -1,17 +1,17 @@
 public class View: Viewable {
-	var ui: Receivable 
+	var io: Receivable 
 	var guess: String!
 
-	public init(ui: Receivable) {
-		self.ui = ui
+	public init(io: Receivable) {
+		self.io = io
 	}
 
 	public func receiveGuess() -> String {
-		guess = ui.getUserInput()
+		guess = io.getUserInput()
 		if (containsOnlyLetters(guess)) {
 			return guess
 		} else {
-			ui.display("Invalid guess. Please enter a lowercase letter or word.")
+			io.display("Invalid guess. Please enter a lowercase letter or word.")
 			receiveGuess()
 		}
 		return guess
@@ -29,7 +29,7 @@ public class View: Viewable {
        			} 
    		}
    		let assignedBlanks = blanks.joinWithSeparator(" ")
-   		ui.display(assignedBlanks)
+   		io.display(assignedBlanks)
    		return assignedBlanks
 	}
 

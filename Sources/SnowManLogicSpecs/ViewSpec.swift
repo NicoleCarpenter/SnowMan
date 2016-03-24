@@ -3,39 +3,39 @@ import Swiftest
 
 class ViewSpec: Swiftest.Spec {
   	let spec = describe("View logic") {
-  		var ui: MockUI!
+  		var io: MockIO!
         	var mockView: MockView!
 	        before() {
-			ui = MockUI()
-       		 	mockView = MockView(ui: ui)
+			io = MockIO()
+       		 	mockView = MockView(io: io)
         	}
         
        		describe("#receiveGuess") {
         		it("should return the user input if it is a string of letters") {
-        			ui.stubbedUserInput = "hello"
+        			io.stubbedUserInput = "hello"
                 		expect(mockView.receiveGuess()).to.equal("hello")
             		}
 
            		it("should return the user input if it is a single letter") {
-                		ui.stubbedUserInput = "a"
+                		io.stubbedUserInput = "a"
                 		expect(mockView.receiveGuess()).to.equal("a")
             		}
 
             		it("should return an error message if the user input is a number") {   
-                		ui.stubbedUserInput = "1"
+                		io.stubbedUserInput = "1"
                 		expect(mockView.receiveGuess()).to.equal("Invalid")
             		}
 
                     it("should return an error message if the user input is a non-letter character") {
-                        ui.stubbedUserInput = "?"
+                        io.stubbedUserInput = "?"
                         expect(mockView.receiveGuess()).to.equal("Invalid")
                     }
 
                     it("should return an error message if the user input is a combination of valid and invalid inputs") {
-                        ui.stubbedUserInput = "?a"
+                        io.stubbedUserInput = "?a"
                         expect(mockView.receiveGuess()).to.equal("Invalid")
 
-                        ui.stubbedUserInput = "6a"
+                        io.stubbedUserInput = "6a"
                         expect(mockView.receiveGuess()).to.equal("Invalid")
                     }
         	}

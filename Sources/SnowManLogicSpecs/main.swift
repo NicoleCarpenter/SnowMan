@@ -3,7 +3,7 @@ import Swiftest
 Swiftest.register([
   	GameSpec.self,
   	GuessManagerSpec.self,
-  	UISpec.self, 
+  	IOSpec.self, 
   	ViewSpec.self
 ])
 

@@ -5,6 +5,6 @@ let dictionaryManager = DictionaryManager(words: words)
 let guessManager = GuessManager(totalIncorrectGuessesAllowed: 10)
 let word = dictionaryManager.getRandomWord()
 
-let ui = UI()
-let view = View(ui: ui)
+let io = IO()
+let view = View(io: io)
 let game = Game(word: word, guessManager: guessManager, view: view)

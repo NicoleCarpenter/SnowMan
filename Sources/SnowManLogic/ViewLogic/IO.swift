@@ -1,4 +1,4 @@
-public class UI: Receivable {
+public class IO: Receivable {
 	public init() {
 	}
 

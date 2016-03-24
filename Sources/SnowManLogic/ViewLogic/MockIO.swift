@@ -1,4 +1,4 @@
-public class MockUI: Receivable {
+public class MockIO: Receivable {
 	public var stubbedUserInput: String!
 
 	public init() {}
