@@ -8,7 +8,10 @@ public class View: Viewable {
 
 	public func receiveGuess() -> String {
 		guess = io.getUserInput()
-		if (containsOnlyLetters(guess)) {
+		if (guess == "") {
+			io.display("Invalid guess. Please enter a lowercase letter or word.")
+			receiveGuess()
+		} else if (containsOnlyLetters(guess)) {
 			return guess
 		} else {
 			io.display("Invalid guess. Please enter a lowercase letter or word.")
@@ -31,6 +34,18 @@ public class View: Viewable {
    		let assignedBlanks = blanks.joinWithSeparator(" ")
    		io.display(assignedBlanks)
    		return assignedBlanks
+	}
+
+	public func displayRemainingGuesses(remainingGuesses: Int) {
+		io.display("You have \(remainingGuesses) remaining guesses")
+	}
+
+	public func displayResults(word: String, winner: Bool) {
+		if (winner) {
+			io.display("Congratulations. You win! You correctly guessed \"\(word)\"")
+		} else {
+			io.display("Game Over. You ran out of guesses. The word was \"\(word)\"")
+		}
 	}
 
 	private func containsOnlyLetters(input: String) -> Bool {

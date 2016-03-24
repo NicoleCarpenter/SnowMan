@@ -38,6 +38,11 @@ class ViewSpec: Swiftest.Spec {
                         io.stubbedUserInput = "6a"
                         expect(mockView.receiveGuess()).to.equal("Invalid")
                     }
+
+                    it("should return an errof message if the user hits return") {
+                        io.stubbedUserInput = "6a"
+                        expect(mockView.receiveGuess()).to.equal("Invalid")
+                    }
         	}
 
         	describe("#assignBlanks") {

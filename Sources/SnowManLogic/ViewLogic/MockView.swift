@@ -8,7 +8,9 @@ public class MockView: Viewable {
 
 	public func receiveGuess() -> String {
 		guess = io.getUserInput()
-		if (containsOnlyLetters(guess)) {
+		if (guess == "") {
+			return "invalid"
+		} else if (containsOnlyLetters(guess)) {
 			return guess
 		} else {
 			return "Invalid"

@@ -20,6 +20,18 @@ public class GuessManager {
 		return remainingGuesses <= 0
 	}
 
+	public func calculateRemainingGuesses() -> Int {
+		return totalIncorrectGuessesAllowed - incorrectGuesses.count
+	}
+
+	public func isGuessingFullWord(guess: String) -> Bool {
+		return guess.characters.count > 1
+	}
+
+	public func correctlyGuessedFullWord(word: String, guess: String) -> Bool {
+		return guess == word
+	}
+
 	public func appendGuess(word: String, guess: Character) {
 		if (hasGuessInWord(word, guess: guess)) {
 			correctGuesses.append(String(guess))
@@ -29,11 +41,7 @@ public class GuessManager {
 		calculateRemainingGuesses()
 	}
 
-	public func hasGuessInWord(word: String, guess: Character) -> Bool {
+	private func hasGuessInWord(word: String, guess: Character) -> Bool {
 		return word.lowercaseString.characters.contains(guess)
-	}
-
-	private func calculateRemainingGuesses() -> Int {
-		return totalIncorrectGuessesAllowed - incorrectGuesses.count
 	}
 }

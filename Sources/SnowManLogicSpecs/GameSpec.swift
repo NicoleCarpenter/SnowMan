@@ -17,18 +17,6 @@ class GameSpec: Swiftest.Spec {
 			game = Game(word: word, guessManager: guessManager, view: view)
 		}
 
-		describe("#isWinner") {
-			it("should return true if winning condition is met") {
-				guessManager.correctGuesses = ["a", "p", "l", "e"]
-				expect(game.isWinner()).to.equal(true)
-			}
-
-			it("should return false if winning condition is not met") {
-				guessManager.correctGuesses = ["a", "p"]
-				expect(game.isWinner()).to.equal(false)
-			}
-		}
-
 		describe("#gameIsOver") {
 			it( "should return true if winning conditions are met") {
 				guessManager.correctGuesses = ["a", "p", "l", "e"]
@@ -44,6 +32,18 @@ class GameSpec: Swiftest.Spec {
 				guessManager.correctGuesses = ["a"]
 				guessManager.incorrectGuesses = ["b"]
 				expect(game.gameIsOver()).to.equal(false)
+			}
+		}
+
+		describe("#isWinner") {
+			it("should return true if winning condition is met") {
+				guessManager.correctGuesses = ["a", "p", "l", "e"]
+				expect(game.isWinner()).to.equal(true)
+			}
+
+			it("should return false if winning condition is not met") {
+				guessManager.correctGuesses = ["a", "p"]
+				expect(game.isWinner()).to.equal(false)
 			}
 		}
 	}
