@@ -15,11 +15,11 @@ public class Game {
 
 	public func isWinner() -> Bool {
 		let letters = separateLetters()
-		return guessManager.findUnguessedLetters(letters).isEmpty
+		return guessManager.determineUnguessedLetters(letters).isEmpty
 	}
 
 	public func gameIsOver() -> Bool {
-		return guessManager.noGuessesRemaining() || isWinner()
+		return guessManager.outOfGuesses() || isWinner()
 	}
 	
 	private func separateLetters() -> [String] {

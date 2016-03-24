@@ -11,7 +11,7 @@ public class View: Viewable {
 		if (containsOnlyLetters(guess)) {
 			return guess
 		} else {
-			print("Invalid guess. Please enter a lowercase letter or word.")
+			ui.display("Invalid guess. Please enter a lowercase letter or word.")
 			receiveGuess()
 		}
 		return guess

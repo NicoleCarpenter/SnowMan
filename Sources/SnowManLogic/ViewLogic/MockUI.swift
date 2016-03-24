@@ -1,10 +1,10 @@
 public class MockUI: Receivable {
-	public var getUserInputReturn: String!
+	public var stubbedUserInput: String!
 
 	public init() {}
 
 	public func getUserInput() -> String {
-		return getUserInputReturn
+		return stubbedUserInput
 	}
 
 	public func display(linesToPrint: String) {

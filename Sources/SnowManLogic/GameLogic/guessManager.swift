@@ -9,18 +9,18 @@ public class GuessManager {
 		incorrectGuesses = []
 	}
 
-	public func findUnguessedLetters(letters: [String]) -> Set<String> {
+	public func determineUnguessedLetters(letters: [String]) -> Set<String> {
 		let setLetters = Set(letters)
 		let setCorrectGuesses = Set(correctGuesses)
 		return setLetters.subtract(setCorrectGuesses)
 	}
 
-	public func calculateRemainingGuesses() -> Int {
-		return totalIncorrectGuessesAllowed - incorrectGuesses.count
-	}
-
-	public func noGuessesRemaining() -> Bool {
+	public func outOfGuesses() -> Bool {
 		let remainingGuesses = calculateRemainingGuesses()
 		return remainingGuesses <= 0
+	}
+
+	private func calculateRemainingGuesses() -> Int {
+		return totalIncorrectGuessesAllowed - incorrectGuesses.count
 	}
 }

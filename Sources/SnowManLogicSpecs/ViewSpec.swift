@@ -12,19 +12,32 @@ class ViewSpec: Swiftest.Spec {
         
        		describe("#receiveGuess") {
         		it("should return the user input if it is a string of letters") {
-        			ui.getUserInputReturn = "hello"
+        			ui.stubbedUserInput = "hello"
                 		expect(mockView.receiveGuess()).to.equal("hello")
             		}
 
            		it("should return the user input if it is a single letter") {
-                		ui.getUserInputReturn = "a"
+                		ui.stubbedUserInput = "a"
                 		expect(mockView.receiveGuess()).to.equal("a")
             		}
 
-            		it("should return an error message if the user input is something other than a letter or word") {   
-                		ui.getUserInputReturn = "1"
+            		it("should return an error message if the user input is a number") {   
+                		ui.stubbedUserInput = "1"
                 		expect(mockView.receiveGuess()).to.equal("Invalid")
             		}
+
+                    it("should return an error message if the user input is a non-letter character") {
+                        ui.stubbedUserInput = "?"
+                        expect(mockView.receiveGuess()).to.equal("Invalid")
+                    }
+
+                    it("should return an error message if the user input is a combination of valid and invalid inputs") {
+                        ui.stubbedUserInput = "?a"
+                        expect(mockView.receiveGuess()).to.equal("Invalid")
+
+                        ui.stubbedUserInput = "6a"
+                        expect(mockView.receiveGuess()).to.equal("Invalid")
+                    }
         	}
 
         	describe("#assignBlanks") {
