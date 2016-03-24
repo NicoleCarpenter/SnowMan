@@ -17,15 +17,15 @@ class GameSpec: Swiftest.Spec {
 			game = Game(word: word, guessManager: guessManager, view: view)
 		}
 
-		describe("#checkForGuessInWord") {
+		describe("#guessIsInWord") {
 			it("should return true if the letter is in the word") {
 				let guess: Character = "a"
-				expect(game.checkForGuessInWord(guess)).to.equal(true)
+				expect(game.guessIsInWord(guess)).to.equal(true)
 			}
 
 			it("should return false if the letter is not in the word") {
 				let guess: Character = "b"
-				expect(game.checkForGuessInWord(guess)).to.equal(false)
+				expect(game.guessIsInWord(guess)).to.equal(false)
 			}    
 		}
 
@@ -41,21 +41,21 @@ class GameSpec: Swiftest.Spec {
 			}
 		}
 
-		describe("#gameOver") {
+		describe("#gameIsOver") {
 			it( "should return true if winning conditions are met") {
 				guessManager.correctGuesses = ["a", "p", "l", "e"]
-				expect(game.gameOver()).to.equal(true)
+				expect(game.gameIsOver()).to.equal(true)
 			}
 
 			it( "should return true if no remaining guess conditions are met") {
 				guessManager.incorrectGuesses = ["c", "b", "d", "f", "g", "h"]
-				expect(game.gameOver()).to.equal(true)
+				expect(game.gameIsOver()).to.equal(true)
 			}
             
 			it("should return false if there is not a winner and there are remaining guesses") {
 				guessManager.correctGuesses = ["a"]
 				guessManager.incorrectGuesses = ["b"]
-				expect(game.gameOver()).to.equal(false)
+				expect(game.gameIsOver()).to.equal(false)
 			}
 		}
 	}

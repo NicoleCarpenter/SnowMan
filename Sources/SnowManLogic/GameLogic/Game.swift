@@ -9,17 +9,16 @@ public class Game {
 		self.view = view
 	}
 
-	public func checkForGuessInWord(guess: Character) -> Bool {
+	public func guessIsInWord(guess: Character) -> Bool {
 		return word.lowercaseString.characters.contains(guess)
 	}
 
 	public func isWinner() -> Bool {
 		let letters = separateLetters()
-		let unguessedLetters = guessManager.findUnguessedLetters(letters)
-		return unguessedLetters.isEmpty
+		return guessManager.findUnguessedLetters(letters).isEmpty
 	}
 
-	public func gameOver() -> Bool {
+	public func gameIsOver() -> Bool {
 		return guessManager.noGuessesRemaining() || isWinner()
 	}
 	
