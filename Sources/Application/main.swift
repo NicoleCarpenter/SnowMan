@@ -1,7 +1,7 @@
 import SnowManLogic
 import Dictionary
 
-let dictionaryManager = DictionaryManager() 
+let dictionaryManager = DictionaryManager(words: words) 
 let guessManager = GuessManager(totalIncorrectGuessesAllowed: 10)
 let word = dictionaryManager.getRandomWord()
 

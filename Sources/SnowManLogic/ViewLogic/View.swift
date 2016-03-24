@@ -23,10 +23,10 @@ public class View: Viewable {
 		
 		for letter in letters { 
 			if (correctGuesses.contains(letter)) { 
-           		blanks.append(letter)  
-       		} else { 
-           		blanks.append("__ ") 
-       		} 
+	           		blanks.append(letter)  
+       			} else { 
+           			blanks.append("__ ") 
+       			} 
    		}
    		let assignedBlanks = blanks.joinWithSeparator(" ")
    		ui.display(assignedBlanks)
@@ -35,9 +35,9 @@ public class View: Viewable {
 
 	private func containsOnlyLetters(input: String) -> Bool {
    		for character in input.characters {
-      		if (!(character >= "a" && character <= "z")) {
-         		return false
-      		}
+      			if (!(character >= "a" && character <= "z")) {
+         			return false
+      			}
    		}
    		return true
 	}

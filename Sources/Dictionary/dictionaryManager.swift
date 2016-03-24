@@ -1,19 +1,20 @@
 import OS
 
 public class DictionaryManager {
-	public let gameWords = words
+	public var words: [String]
 
-	public init() {
+	public init(words: [String]) {
+		self.words = words
 	}
 
 	public func getRandomWord() -> String {
 		let index = getRandomIndex()
-		return gameWords[index]
+		return words[index]
 	}
 
 	private func getRandomIndex() -> Int {
 		OS.srand(UInt32(time(nil)))
 		let randNum = Int(OS.rand())
-		return randNum % gameWords.count
+		return randNum % words.count
 	}
 }
