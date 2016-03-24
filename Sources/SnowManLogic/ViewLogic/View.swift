@@ -1,5 +1,5 @@
 public class View: Viewable {
-	var io: Receivable 
+	var io: Receivable
 	var guess: String!
 
 	public init(io: Receivable) {
@@ -7,7 +7,7 @@ public class View: Viewable {
 	}
 
 	public func receiveGuess() -> String {
-		guess = io.getUserInput()
+		guess = io.getUserInput(io.myReadLine)
 		if (guess == "") {
 			io.display("Invalid guess. Please enter a lowercase letter or word.")
 			receiveGuess()

@@ -3,7 +3,11 @@ public class MockIO: Receivable {
 
 	public init() {}
 
-	public func getUserInput() -> String {
+	public func getUserInput(getInput: () -> String) -> String {
+		return String(getInput())
+	}
+
+	public func myReadLine() -> String {
 		return stubbedUserInput
 	}
 
