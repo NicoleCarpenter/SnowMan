@@ -41,5 +41,20 @@ class GuessManagerSpec: Swiftest.Spec {
     				expect(guessManager.hasNoGuessesRemaining()).to.equal(false)
     			}
     		}
+
+            
+	        describe("#hasGuessInWord") {
+        	    	it("should return true if the letter is in the word") {
+                        let word = "apple"
+                		let guess: Character = "a"
+                		expect(guessManager.hasGuessInWord(word, guess: guess)).to.equal(true)
+            		}
+
+            		it("should return false if the letter is not in the word") {
+                        let word = "apple"
+                		let guess: Character = "b"
+                		expect(guessManager.hasGuessInWord(word, guess: guess)).to.equal(false)
+            		}    
+        	}
 	}
 }

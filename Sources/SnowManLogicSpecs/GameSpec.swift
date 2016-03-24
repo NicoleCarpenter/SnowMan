@@ -6,27 +6,15 @@ class GameSpec: Swiftest.Spec {
 		var guessManager: GuessManager!
 		var word: String!
 		var io: IO!
-		var view: Viewable!
+		var view: View!
 		var game: Game!
 
 		before() {
 			guessManager =  GuessManager(totalIncorrectGuessesAllowed: 5)
 			word = "apple"
 			io = IO()
-			view = MockView(io: io)
+			view = View(io: io)
 			game = Game(word: word, guessManager: guessManager, view: view)
-		}
-
-		describe("#hasGuessInWord") {
-			it("should return true if the letter is in the word") {
-				let guess: Character = "a"
-				expect(game.hasGuessInWord(guess)).to.equal(true)
-			}
-
-			it("should return false if the letter is not in the word") {
-				let guess: Character = "b"
-				expect(game.hasGuessInWord(guess)).to.equal(false)
-			}    
 		}
 
 		describe("#isWinner") {

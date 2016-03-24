@@ -1,16 +1,12 @@
 public class Game {
 	var word: String
 	var guessManager: GuessManager
-	var view: Viewable
+	var view: View
 
-	public init(word: String, guessManager: GuessManager, view: Viewable) {
+	public init(word: String, guessManager: GuessManager, view: View) {
 		self.word = word
 		self.guessManager = guessManager
 		self.view = view
-	}
-
-	public func hasGuessInWord(guess: Character) -> Bool {
-		return word.lowercaseString.characters.contains(guess)
 	}
 
 	public func isWinner() -> Bool {
@@ -21,7 +17,7 @@ public class Game {
 	public func gameIsOver() -> Bool {
 		return guessManager.hasNoGuessesRemaining() || isWinner()
 	}
-	
+
 	private func separateLetters() -> [String] {
 		return word.characters.map { String($0) }
 	}
