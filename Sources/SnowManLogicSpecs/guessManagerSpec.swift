@@ -42,19 +42,51 @@ class GuessManagerSpec: Swiftest.Spec {
     			}
     		}
 
+            describe("#appendGuess") {
+                var word: String!
+                before() {
+                    word = "apple"
+                }
+                it("should add guess to correctGuesses collection if it is in the word") {
+                    let guess: Character = "a"
+                    guessManager.appendGuess(word, guess: guess)
+                    expect(guessManager.correctGuesses).to.contain(String(guess))
+                }
+
+                it("should not add guess to incorrectGuesses collection if it is in the word") {
+                    let guess: Character = "a"
+                    guessManager.appendGuess(word, guess: guess)
+                    expect(guessManager.incorrectGuesses).notTo.contain(String(guess))
+                }
+
+                it("should add guess to incorrectGuesses collection if it is not in the word") {
+                    let guess: Character = "b"
+                    guessManager.appendGuess(word, guess: guess)
+                    expect(guessManager.incorrectGuesses).to.contain(String(guess))
+                }
+
+                it("should not add guess to correctGuesses collection if it is not in the word") {
+                    let guess: Character = "b"
+                    guessManager.appendGuess(word, guess: guess)
+                    expect(guessManager.correctGuesses).notTo.contain(String(guess))
+                }
+            }
+
             
 	        describe("#hasGuessInWord") {
-        	    	it("should return true if the letter is in the word") {
-                        let word = "apple"
-                		let guess: Character = "a"
-                		expect(guessManager.hasGuessInWord(word, guess: guess)).to.equal(true)
-            		}
+                var word: String!
+                before() {
+                    word = "apple"
+                }
+        	    it("should return true if the letter is in the word") {
+                    let guess: Character = "a"
+                	expect(guessManager.hasGuessInWord(word, guess: guess)).to.equal(true)
+            	}
 
-            		it("should return false if the letter is not in the word") {
-                        let word = "apple"
-                		let guess: Character = "b"
-                		expect(guessManager.hasGuessInWord(word, guess: guess)).to.equal(false)
-            		}    
+            	it("should return false if the letter is not in the word") {
+                    let guess: Character = "b"
+                    expect(guessManager.hasGuessInWord(word, guess: guess)).to.equal(false)
+            	}    
         	}
 	}
 }

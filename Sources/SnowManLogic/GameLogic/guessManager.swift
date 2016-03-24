@@ -20,6 +20,15 @@ public class GuessManager {
 		return remainingGuesses <= 0
 	}
 
+	public func appendGuess(word: String, guess: Character) {
+		if (hasGuessInWord(word, guess: guess)) {
+			correctGuesses.append(String(guess))
+		} else {
+			incorrectGuesses.append(String(guess))
+		}
+		calculateRemainingGuesses()
+	}
+
 	public func hasGuessInWord(word: String, guess: Character) -> Bool {
 		return word.lowercaseString.characters.contains(guess)
 	}
