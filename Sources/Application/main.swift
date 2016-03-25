@@ -1,5 +1,5 @@
 import SnowManLogic
-import Dictionary
+import SnowManDictionary
 
 let dictionaryManager = DictionaryManager(words: words) 
 let guessManager = GuessManager(totalIncorrectGuessesAllowed: 10)

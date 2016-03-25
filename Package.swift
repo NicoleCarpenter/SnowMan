@@ -3,10 +3,10 @@ import PackageDescription
 let package = Package(
   	name: "SnowMan",
   	targets: [
-	  	Target(name: "Dictionary"),
+	  	Target(name: "SnowManDictionary"),
   		Target(name: "SnowManLogic"),
- 		Target(name: "Application", dependencies: ["SnowManLogic", "Dictionary"]),
- 		Target(name: "DictionarySpecs", dependencies: ["Dictionary"]),
+ 		Target(name: "Application", dependencies: ["SnowManLogic", "SnowManDictionary"]),
+ 		Target(name: "SnowManDictionarySpecs", dependencies: ["SnowManDictionary"]),
  		Target(name: "SnowManLogicSpecs", dependencies: ["SnowManLogic"]),
   	],
   	dependencies: [

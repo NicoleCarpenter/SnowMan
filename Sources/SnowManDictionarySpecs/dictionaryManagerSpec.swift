@@ -1,4 +1,4 @@
-import Dictionary
+import SnowManDictionary
 import Swiftest
 
 class DictionaryManagerSpec: Swiftest.Spec {
