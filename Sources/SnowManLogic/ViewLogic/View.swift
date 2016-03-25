@@ -8,15 +8,10 @@ public class View: Viewable {
 
 	public func receiveGuess() -> String {
 		guess = io.getUserInput(io.myReadLine)
-		if (guess == "") {
+		if (guess == "" || !(containsOnlyLetters(guess))) {
 			io.display("Invalid guess. Please enter a lowercase letter or word.")
 			receiveGuess()
-		} else if (containsOnlyLetters(guess)) {
-			return guess
-		} else {
-			io.display("Invalid guess. Please enter a lowercase letter or word.")
-			receiveGuess()
-		}
+		} 
 		return guess
 	}
 
