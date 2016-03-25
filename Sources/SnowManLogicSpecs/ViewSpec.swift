@@ -4,44 +4,41 @@ import Swiftest
 class ViewSpec: Swiftest.Spec {
   	let spec = describe("View logic") {
 		var io: MockIO!
-        	var view: MockView!
+        	var view: View!
 	        before() {
 			io = MockIO()
-       		 	view = MockView(io: io)
+       		 	view = View(io: io)
         	}
         
        		describe("#receiveGuess") {
         		it("should return the user input if it is a string of letters") {
-        			io.stubbedUserInput = "hello"
-                		expect(view.receiveGuess()).to.equal("hello")
-            		}
+            		io.stubbedUserInput = ["hello"]
+                    expect(view.receiveGuess(io.myReadLine)).to.equal("hello")
+           		}
 
            		it("should return the user input if it is a single letter") {
-                		io.stubbedUserInput = "a"
-                		expect(view.receiveGuess()).to.equal("a")
+                		io.stubbedUserInput = ["a"]
+                		expect(view.receiveGuess(io.myReadLine)).to.equal("a")
             		}
 
             		it("should return an error message if the user input is a number") {   
-                		io.stubbedUserInput = "1"
-                		expect(view.receiveGuess()).to.equal("Invalid")
+                		io.stubbedUserInput = ["1", "fail"]
+                		expect(view.receiveGuess(io.myReadLine)).to.equal("fail")
             		}
 
                 	it("should return an error message if the user input is a non-letter character") {
-                        	io.stubbedUserInput = "?"
-                        	expect(view.receiveGuess()).to.equal("Invalid")
+                        	io.stubbedUserInput = ["?", "fail"]
+                        	expect(view.receiveGuess(io.myReadLine)).to.equal("fail")
                     	}
 
                     	it("should return an error message if the user input is a combination of valid and invalid inputs") {
-                        	io.stubbedUserInput = "?a"
-                        	expect(view.receiveGuess()).to.equal("Invalid")
-
-                        	io.stubbedUserInput = "6a"
-                        	expect(view.receiveGuess()).to.equal("Invalid")
+                        	io.stubbedUserInput = ["?a", "fail"]
+                        	expect(view.receiveGuess(io.myReadLine)).to.equal("fail")
                     	}
 
                     	it("should return an error message if the user hits return") {
-                        	io.stubbedUserInput = ""
-                        	expect(view.receiveGuess()).to.equal("Invalid")
+                        	io.stubbedUserInput = ["", "fail"]
+                        	expect(view.receiveGuess(io.myReadLine)).to.equal("fail")
                     	}
         	}
 
@@ -69,5 +66,41 @@ class ViewSpec: Swiftest.Spec {
             		}
 
         	}
+
+	        describe("#displayRemainingGuesses") {
+        		it("should return the number of guesses remaining") {
+                    		var remainingGuesses = 4
+                    		expect(view.displayRemainingGuesses(4)).to.equal("You have 4 remaining guesses")
+                
+                    		remainingGuesses = 0
+                    		expect(view.displayRemainingGuesses(0)).to.equal("You have 0 remaining guesses")
+
+                    		remainingGuesses = -2
+                    		expect(view.displayRemainingGuesses(-2)).to.equal("You have -2 remaining guesses")
+
+                	}
+            	}
+
+            	describe("#displayResults") {
+                	var gameWord: String!
+
+                	before() {
+                    		gameWord = "hello"
+                	}
+                
+			it("should print a congragulatory message if winning conditions met") {
+                    		let winner = true
+                    		expect(view.displayResults(gameWord, winner: winner)).to.equal("Congratulations. You win! You correctly guessed \"hello\"")
+                	}
+
+                	it("should inform player of loss if winning conditions not met") {
+                    		let winner = false
+                    		expect(view.displayResults(gameWord, winner: winner)).to.equal("Game Over. You ran out of guesses. The word was \"hello\"")
+                	}
+            	}
   	}
+}
+
+private func myUserInput() -> String {
+	return "hello"
 }

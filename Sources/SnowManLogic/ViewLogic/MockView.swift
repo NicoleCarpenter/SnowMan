@@ -6,15 +6,13 @@ public class MockView: Viewable {
 		self.io = io
 	}
 
-	public func receiveGuess() -> String {
-		guess = io.getUserInput(io.myReadLine)
-		if (guess == "") {
-			return "Invalid"
-		} else if (containsOnlyLetters(guess)) {
-			return guess
-		} else {
-			return "Invalid"
-		}
+	public func receiveGuess(getGuess: () -> String) -> String {
+		guess = String(getGuessFromUser())
+
+		if (guess == "" || !(containsOnlyLetters(guess))) {
+			return "false"
+		} 
+		return "true"
 	}
 
 	public func assignBlanks(gameWord: String, correctGuesses: [String]) -> String {
@@ -29,6 +27,11 @@ public class MockView: Viewable {
 			} 
 		}
    		return blanks.joinWithSeparator(" ")
+	}
+
+
+	public func getGuessFromUser() -> String {
+		return io.getUserInput(io.myReadLine)
 	}
 
 	private func containsOnlyLetters(input: String) -> Bool {

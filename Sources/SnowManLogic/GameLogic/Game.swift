@@ -29,7 +29,7 @@ public class Game {
 
 	private func playerTurn() {
 		view.assignBlanks(word, correctGuesses: guessManager.correctGuesses)
-		guess = view.receiveGuess()
+		guess = view.receiveGuess(view.getGuessFromUser)
 		
 		if (guessManager.isGuessingFullWord(guess)) {
 			guessManager.appendGuess(word, guess: "#")

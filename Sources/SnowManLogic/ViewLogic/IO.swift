@@ -1,4 +1,5 @@
 public class IO: Receivable {
+
 	public init() {
 	}
 

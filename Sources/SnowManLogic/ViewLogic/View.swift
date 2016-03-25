@@ -6,13 +6,18 @@ public class View: Viewable {
 		self.io = io
 	}
 
-	public func receiveGuess() -> String {
-		guess = io.getUserInput(io.myReadLine)
-		if (guess == "" || !(containsOnlyLetters(guess))) {
+	public func receiveGuess(getGuess: () -> String) -> String {
+		guess = String(getGuess())
+		while (guess == "" || !(containsOnlyLetters(guess))) {
 			io.display("Invalid guess. Please enter a lowercase letter or word.")
-			receiveGuess()
+			guess = String(getGuessFromUser())
+			print(guess)
 		} 
 		return guess
+	}
+
+	public func getGuessFromUser() -> String {
+		return io.getUserInput(io.myReadLine)
 	}
 
 	public func assignBlanks(gameWord: String, correctGuesses: [String]) -> String {
@@ -31,16 +36,21 @@ public class View: Viewable {
    		return assignedBlanks
 	}
 
-	public func displayRemainingGuesses(remainingGuesses: Int) {
-		io.display("You have \(remainingGuesses) remaining guesses")
+	public func displayRemainingGuesses(remainingGuesses: Int) -> String {
+		let message = "You have \(remainingGuesses) remaining guesses"
+		io.display(message)
+		return message
 	}
 
-	public func displayResults(word: String, winner: Bool) {
+	public func displayResults(word: String, winner: Bool) -> String {
+		let message: String
 		if (winner) {
-			io.display("Congratulations. You win! You correctly guessed \"\(word)\"")
+			message = "Congratulations. You win! You correctly guessed \"\(word)\""
 		} else {
-			io.display("Game Over. You ran out of guesses. The word was \"\(word)\"")
+			message = "Game Over. You ran out of guesses. The word was \"\(word)\""
 		}
+		io.display(message)
+		return message
 	}
 
 	private func containsOnlyLetters(input: String) -> Bool {
