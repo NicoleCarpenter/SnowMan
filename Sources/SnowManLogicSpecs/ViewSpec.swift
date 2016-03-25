@@ -74,33 +74,21 @@ class ViewSpec: Swiftest.Spec {
                 
                     		remainingGuesses = 0
                     		expect(view.displayRemainingGuesses(0)).to.equal("You have 0 remaining guesses")
-
-                    		remainingGuesses = -2
-                    		expect(view.displayRemainingGuesses(-2)).to.equal("You have -2 remaining guesses")
-
                 	}
             	}
 
-            	describe("#displayResults") {
-                	var gameWord: String!
+            describe("#displayWinningMessage") {
+                it("should print a congragulatory message if winning conditions met") {
+                    let gameWord = "hello"
+                    expect(view.displayWinningMessage(gameWord)).to.equal("Congratulations. You win! You correctly guessed \"hello\"")
+                }
+            }
 
-                	before() {
-                    		gameWord = "hello"
-                	}
-                
-			it("should print a congragulatory message if winning conditions met") {
-                    		let winner = true
-                    		expect(view.displayResults(gameWord, winner: winner)).to.equal("Congratulations. You win! You correctly guessed \"hello\"")
-                	}
-
-                	it("should inform player of loss if winning conditions not met") {
-                    		let winner = false
-                    		expect(view.displayResults(gameWord, winner: winner)).to.equal("Game Over. You ran out of guesses. The word was \"hello\"")
-                	}
-            	}
+            describe("#displayLosingMessage") {
+                it("should inform player of loss if winning conditions not met") {
+                    let gameWord = "hello"
+                    expect(view.displayLosingMessage(gameWord)).to.equal("Game Over. You ran out of guesses. The word was \"hello\"")
+                }
+            }
   	}
-}
-
-private func myUserInput() -> String {
-	return "hello"
 }

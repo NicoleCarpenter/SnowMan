@@ -7,7 +7,7 @@ public class View: Viewable {
 	}
 
 	public func receiveGuess(getGuess: () -> String) -> String {
-		guess = String(getGuess())
+		guess = String(getGuessFromUser())
 		while (guess == "" || !(containsOnlyLetters(guess))) {
 			io.display("Invalid guess. Please enter a lowercase letter or word.")
 			guess = String(getGuessFromUser())
@@ -42,13 +42,14 @@ public class View: Viewable {
 		return message
 	}
 
-	public func displayResults(word: String, winner: Bool) -> String {
-		let message: String
-		if (winner) {
-			message = "Congratulations. You win! You correctly guessed \"\(word)\""
-		} else {
-			message = "Game Over. You ran out of guesses. The word was \"\(word)\""
-		}
+	public func displayWinningMessage(word: String) -> String {
+		let message = "Congratulations. You win! You correctly guessed \"\(word)\""
+		io.display(message)
+		return message
+	}
+
+	public func displayLosingMessage(word: String) -> String {
+		let message = "Game Over. You ran out of guesses. The word was \"\(word)\""
 		io.display(message)
 		return message
 	}

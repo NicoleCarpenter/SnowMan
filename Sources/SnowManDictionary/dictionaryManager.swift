@@ -1,10 +1,10 @@
 import OS
 
 public class DictionaryManager {
-	public var words: [String]
+	public var words: [String]			
 
 	public init(words: [String]) {
-		self.words = words
+		self.words = SnowManDictionary.words		// does this need to be initialized
 	}
 
 	public func getRandomWord() -> String {

@@ -1,6 +1,6 @@
 public class Game {
 	var word: String
-	var guessManager: GuessManager
+	let guessManager: GuessManager
 	var view: View
 	var guess: String
 
@@ -12,10 +12,10 @@ public class Game {
 	}
 
 	public func playGame() {
-		while (gameIsOver() == false) {
+		while (!gameIsOver()) {
 			playerTurn()
 		}
-		view.displayResults(word, winner: isWinner())
+		displayResults()
 	}
 
 	public func gameIsOver() -> Bool {
@@ -41,5 +41,13 @@ public class Game {
 
 	private func separateLetters() -> [String] {
 		return word.characters.map { String($0) }
+	}
+
+	private func displayResults() {
+		if (isWinner()) {
+			view.displayWinningMessage(word)
+		} else {
+			view.displayLosingMessage(word)
+		}
 	}
 }
