@@ -9,7 +9,12 @@ class IOSpec: Swiftest.Spec {
   		}
   		
 	        it("should return the user input") {
-        		// expect(io.getUserInput(io.myReadLine)).to.equal("hello")
+        		expect(io.getUserInput(myReadLine)).to.equal("hello")
         	}
-  	}
+		
+        }
+}
+
+private func myReadLine() -> String {
+	return "hello"
 }
