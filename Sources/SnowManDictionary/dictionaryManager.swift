@@ -4,7 +4,7 @@ public class DictionaryManager {
 	public var words: [String]			
 
 	public init(words: [String]) {
-		self.words = SnowManDictionary.words		// does this need to be initialized
+		self.words = SnowManDictionary.words
 	}
 
 	public func getRandomWord() -> String {
