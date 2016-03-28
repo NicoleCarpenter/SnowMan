@@ -3,18 +3,14 @@ import Swiftest
 
 class IOSpec: Swiftest.Spec {
   	let spec = describe("IO logic") {
-  		var io: Receivable!
+  		var io: Interactable!
   		before() {
   			io = IO()
   		}
   		
 	        it("should return the user input") {
-        		expect(io.getUserInput(myReadLine)).to.equal("hello")
+        		expect(io.getUserInput()).to.equal("hello")
         	}
 		
         }
-}
-
-private func myReadLine() -> String {
-	return "hello"
 }

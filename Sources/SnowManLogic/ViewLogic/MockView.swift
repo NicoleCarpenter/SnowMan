@@ -1,14 +1,13 @@
 public class MockView: Viewable {
-	var io: Receivable 
+	var io: Interactable 
 	var guess: String!
 
-	public init(io: Receivable) {
+	public init(io: Interactable) {
 		self.io = io
 	}
 
-	public func receiveGuess(getGuess: () -> String) -> String {
+	public func receiveGuess() -> String {
 		guess = String(getGuessFromUser())
-
 		if (guess == "" || !(containsOnlyLetters(guess))) {
 			return "false"
 		} 
@@ -31,7 +30,7 @@ public class MockView: Viewable {
 
 
 	public func getGuessFromUser() -> String {
-		return io.getUserInput(io.myReadLine)
+		return io.getUserInput()
 	}
 
 	private func containsOnlyLetters(input: String) -> Bool {

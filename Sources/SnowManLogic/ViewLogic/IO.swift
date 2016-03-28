@@ -1,13 +1,13 @@
-public class IO: Receivable {
+public class IO: Interactable {
 
 	public init() {
 	}
 
-	public func getUserInput(getInput: () -> String) -> String {
-		return String(getInput())
+	public func getUserInput() -> String {
+		return consoleReadLine()
 	}
 
-	public func myReadLine() -> String {
+	public func consoleReadLine() -> String {
 		return readLine(stripNewline: true) ?? ""
 	}
 

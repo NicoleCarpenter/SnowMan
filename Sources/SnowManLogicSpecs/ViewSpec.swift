@@ -13,32 +13,32 @@ class ViewSpec: Swiftest.Spec {
        		describe("#receiveGuess") {
         		it("should return the user input if it is a string of letters") {
             		io.stubbedUserInput = ["hello"]
-                    expect(view.receiveGuess(io.myReadLine)).to.equal("hello")
+                    expect(view.receiveGuess()).to.equal("hello")
            		}
 
            		it("should return the user input if it is a single letter") {
                 		io.stubbedUserInput = ["a"]
-                		expect(view.receiveGuess(io.myReadLine)).to.equal("a")
+                		expect(view.receiveGuess()).to.equal("a")
             		}
 
             		it("should return an error message if the user input is a number") {   
                 		io.stubbedUserInput = ["1", "fail"]
-                		expect(view.receiveGuess(io.myReadLine)).to.equal("fail")
+                		expect(view.receiveGuess()).to.equal("fail")
             		}
 
                 	it("should return an error message if the user input is a non-letter character") {
                         	io.stubbedUserInput = ["?", "fail"]
-                        	expect(view.receiveGuess(io.myReadLine)).to.equal("fail")
+                        	expect(view.receiveGuess()).to.equal("fail")
                     	}
 
                     	it("should return an error message if the user input is a combination of valid and invalid inputs") {
                         	io.stubbedUserInput = ["?a", "fail"]
-                        	expect(view.receiveGuess(io.myReadLine)).to.equal("fail")
+                        	expect(view.receiveGuess()).to.equal("fail")
                     	}
 
                     	it("should return an error message if the user hits return") {
                         	io.stubbedUserInput = ["", "fail"]
-                        	expect(view.receiveGuess(io.myReadLine)).to.equal("fail")
+                        	expect(view.receiveGuess()).to.equal("fail")
                     	}
         	}
 

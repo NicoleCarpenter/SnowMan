@@ -2,9 +2,7 @@ import Swiftest
 
 Swiftest.register([
   	GameSpec.self,
-  	GuessManagerSpec.self,
-  	IOSpec.self, 
-  	ViewSpec.self
+  	GuessManagerSpec.self
 ])
 
 try Swiftest.run()

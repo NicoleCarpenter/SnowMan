@@ -2,39 +2,37 @@ public class Game {
 	var word: String
 	let guessManager: GuessManager
 	var view: View
-	var guess: String
 
 	public init(word: String, guessManager: GuessManager, view: View) {
 		self.word = word
 		self.guessManager = guessManager
 		self.view = view
-		guess = ""
 	}
 
 	public func playGame() {
-		while (!gameIsOver()) {
+		while (!isGameOver()) {
 			playerTurn()
 		}
 		displayResults()
 	}
 
-	public func gameIsOver() -> Bool {
+	public func isGameOver() -> Bool {
 		return guessManager.hasNoGuessesRemaining() || isWinner()
 	}
 
 	public func isWinner() -> Bool {
 		let letters = separateLetters()
-		return guessManager.determineUnguessedLetters(letters).isEmpty || guessManager.correctlyGuessedFullWord(word, guess: guess)
+		return guessManager.determineUnguessedLetters(letters).isEmpty || guessManager.correctlyGuessedFullWord(word)
 	}
 
-	private func playerTurn() {
+	private func playerTurn() {		
 		view.assignBlanks(word, correctGuesses: guessManager.correctGuesses)
-		guess = view.receiveGuess(view.getGuessFromUser)
+		guessManager.guess = guessManager.assignGuess(view)
 		
-		if (guessManager.isGuessingFullWord(guess)) {
-			guessManager.appendGuess(word, guess: "#")
+		if (guessManager.isGuessingFullWord()) {
+			guessManager.appendWordPlaceholder(word)
 		} else {
-			guessManager.appendGuess(word, guess: Character(guess))
+			guessManager.appendGuess(word)
 		}
 		view.displayRemainingGuesses(guessManager.calculateRemainingGuesses())
 	}

@@ -1,4 +1,4 @@
-public class MockIO: Receivable {
+public class MockIO: Interactable {
 	public var stubbedUserInput: [String]!
 	var counter: Int
 
@@ -6,11 +6,11 @@ public class MockIO: Receivable {
 		counter = 0
 	}
 
-	public func getUserInput(getInput: () -> String) -> String {
-		return String(getInput())
+	public func getUserInput() -> String {
+		return stubbedUserInput[0]
 	}
 
-	public func myReadLine() -> String {
+	public func consoleReadLine() -> String {
 		let value = stubbedUserInput[counter]
 		counter += 1
 		return value

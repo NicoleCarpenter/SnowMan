@@ -1,23 +1,22 @@
 public class View: Viewable {
-	var io: Receivable
-	var guess: String!
+	var io: Interactable
 
-	public init(io: Receivable) {
+	public init(io: Interactable) {
 		self.io = io
 	}
 
-	public func receiveGuess(getGuess: () -> String) -> String {
-		guess = String(getGuessFromUser())
+	public func receiveGuess() -> String {
+		var guess = String(getGuessFromUser())
 		while (guess == "" || !(containsOnlyLetters(guess))) {
 			io.display("Invalid guess. Please enter a lowercase letter or word.")
-			guess = String(getGuessFromUser())
+			guess = getGuessFromUser()
 			print(guess)
 		} 
 		return guess
 	}
 
 	public func getGuessFromUser() -> String {
-		return io.getUserInput(io.myReadLine)
+		return io.getUserInput()
 	}
 
 	public func assignBlanks(gameWord: String, correctGuesses: [String]) -> String {

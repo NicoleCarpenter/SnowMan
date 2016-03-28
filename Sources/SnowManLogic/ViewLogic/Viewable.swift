@@ -1,4 +1,4 @@
 public protocol Viewable {
-	func receiveGuess(getGuess: () -> String) -> String
+	func receiveGuess() -> String
 	func assignBlanks(gameWord: String, correctGuesses: [String]) -> String
 }
