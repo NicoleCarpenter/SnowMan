@@ -99,34 +99,34 @@ class GuessManagerSpec: Swiftest.Spec {
             	}
 
                 describe("#appendWordPlaceholder") {
-                    var word: String!
-                    before() {
-                        word = "apple"
-                    }
+			var word: String!
+			before() {
+                        	word = "apple"
+                    	}
 
-                    it("should add a placeholder to correctGuesses collection if the word is guessed") {
-                        guessManager.guess = "apple"
-                        guessManager.appendWordPlaceholder(word)
-                        expect(guessManager.correctGuesses).to.contain("#")
-                  }
+                    	it("should add a placeholder to correctGuesses collection if the word is guessed") {
+                        	guessManager.guess = "apple"
+                        	guessManager.appendWordPlaceholder(word)
+                        	expect(guessManager.correctGuesses).to.contain("#")
+                  	}
 
-                  it("should not add a placeholder to incorrectGuesses collection the word is guessed") {
-                        guessManager.guess = "apple"
-                        guessManager.appendWordPlaceholder(word)
-                        expect(guessManager.incorrectGuesses).notTo.contain(guessManager.guess)
-                  }
+                  	it("should not add a placeholder to incorrectGuesses collection the word is guessed") {
+                        	guessManager.guess = "apple"
+                        	guessManager.appendWordPlaceholder(word)
+                        	expect(guessManager.incorrectGuesses).notTo.contain(guessManager.guess)
+                  	}
 
-                  it("should add a placeholder to incorrectGuesses collection if the word is not guessed") {
-                        guessManager.guess = "banana"
-                        guessManager.appendWordPlaceholder(word)
-                        expect(guessManager.incorrectGuesses).to.contain("#")
-                  }
+                  	it("should add a placeholder to incorrectGuesses collection if the word is not guessed") {
+                        	guessManager.guess = "banana"
+                        	guessManager.appendWordPlaceholder(word)
+                        	expect(guessManager.incorrectGuesses).to.contain("#")
+                  	}
 
-                  it("should not add a placeholder to correctGuesses collection if the word is not guessed") {
-                        guessManager.guess = "banana"
-                        guessManager.appendWordPlaceholder(word)
-                        expect(guessManager.correctGuesses).notTo.contain(guessManager.guess)
-                  }
+                  	it("should not add a placeholder to correctGuesses collection if the word is not guessed") {
+                        	guessManager.guess = "banana"
+                        	guessManager.appendWordPlaceholder(word)
+                        	expect(guessManager.correctGuesses).notTo.contain(guessManager.guess)
+                  	}
                 } 
 
             	describe("#appendGuess") {
@@ -159,5 +159,5 @@ class GuessManagerSpec: Swiftest.Spec {
                     		expect(guessManager.correctGuesses).notTo.contain(guessManager.guess)
                 	}
 	    	}
-  }
+	}
 }
