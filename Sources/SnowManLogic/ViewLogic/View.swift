@@ -10,7 +10,6 @@ public class View: Viewable {
 		while (guess == "" || !(containsOnlyLetters(guess))) {
 			io.display("Invalid guess. Please enter a lowercase letter or word.")
 			guess = getGuessFromUser()
-			print(guess)
 		} 
 		return guess
 	}

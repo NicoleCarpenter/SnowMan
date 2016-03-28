@@ -10,12 +10,6 @@ public class MockIO: Interactable {
 		return stubbedUserInput[0]
 	}
 
-	public func consoleReadLine() -> String {
-		let value = stubbedUserInput[counter]
-		counter += 1
-		return value
-	}
-
 	public func display(linesToPrint: String) {
 		print(linesToPrint)
 	}
