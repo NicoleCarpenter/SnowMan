@@ -77,18 +77,18 @@ class ViewSpec: Swiftest.Spec {
                 	}
             	}
 
-            describe("#displayWinningMessage") {
-                it("should print a congragulatory message if winning conditions met") {
-                    let gameWord = "hello"
-                    expect(view.displayWinningMessage(gameWord)).to.equal("Congratulations. You win! You correctly guessed \"hello\"")
-                }
-            }
+            	describe("#displayWinningMessage") {
+ 	        	it("should print a congragulatory message if winning conditions met") {
+				let gameWord = "hello"
+                    		expect(view.displayWinningMessage(gameWord)).to.equal("Congratulations. You win! You correctly guessed \"hello\"")
+                	}
+            	}
 
-            describe("#displayLosingMessage") {
-                it("should inform player of loss if winning conditions not met") {
-                    let gameWord = "hello"
-                    expect(view.displayLosingMessage(gameWord)).to.equal("Game Over. You ran out of guesses. The word was \"hello\"")
-                }
-            }
+            	describe("#displayLosingMessage") {
+                	it("should inform player of loss if winning conditions not met") {
+                    		let gameWord = "hello"
+                    		expect(view.displayLosingMessage(gameWord)).to.equal("Game Over. You ran out of guesses. The word was \"hello\"")
+                	}
+            	}
   	}
 }
