@@ -66,14 +66,14 @@ class GuessManagerSpec: Swiftest.Spec {
                 	}
 
                 	it("should return false if guess is only 1 character") {
-                    guessManager.guess = "h"
+                    		guessManager.guess = "h"
                     		expect(guessManager.isGuessingFullWord()).to.equal(false)   
                 	}
 
-                  it("should return false if guess is 0 characters") {
-                      guessManager.guess = ""
-                      expect(guessManager.isGuessingFullWord()).to.equal(false)
-                  }
+                  	it("should return false if guess is 0 characters") {
+                      		guessManager.guess = ""
+                      		expect(guessManager.isGuessingFullWord()).to.equal(false)
+                  	}
             	}
 
             	describe("#correctlyGuessedFullWord") {
@@ -90,9 +90,9 @@ class GuessManagerSpec: Swiftest.Spec {
                 	it("should return false if only part of the word is guessed") {
                     		guessManager.guess = "app"
                     		expect(guessManager.correctlyGuessedFullWord(word)).to.equal(false)
-                      }
+                      	}
 
-                    it("should return false if the guess is incorrect") {
+                    	it("should return false if the guess is incorrect") {
                     		guessManager.guess = "banana"
                     		expect(guessManager.correctlyGuessedFullWord(word)).to.equal(false)
                 	}
