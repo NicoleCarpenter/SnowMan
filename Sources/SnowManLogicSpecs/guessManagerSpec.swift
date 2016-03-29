@@ -61,18 +61,18 @@ class GuessManagerSpec: Swiftest.Spec {
 
             	describe("#isGuessingFullWord") {
                 	it("should return true if guess is more than 1 character") {
-                        guessManager.guess = "hello"
-                    		expect(guessManager.isGuessingFullWord()).to.equal(true)
+                        let guess = "hello"
+                    		expect(guessManager.isGuessingFullWord(guess)).to.equal(true)
                 	}
 
                 	it("should return false if guess is only 1 character") {
-                    		guessManager.guess = "h"
-                    		expect(guessManager.isGuessingFullWord()).to.equal(false)   
+                        let guess = "h"
+                    		expect(guessManager.isGuessingFullWord(guess)).to.equal(false)   
                 	}
 
                   	it("should return false if guess is 0 characters") {
-                      		guessManager.guess = ""
-                      		expect(guessManager.isGuessingFullWord()).to.equal(false)
+                        let guess = ""
+                      		expect(guessManager.isGuessingFullWord(guess)).to.equal(false)
                   	}
             	}
 
@@ -83,49 +83,49 @@ class GuessManagerSpec: Swiftest.Spec {
                 	}
 
                 	it("should return true if full word is guessed") {
-                    		guessManager.guess = "apple"
-                    		expect(guessManager.correctlyGuessedFullWord(word)).to.equal(true)
+                    	let guess = "apple"
+                    		expect(guessManager.correctlyGuessedFullWord(word, guess: guess)).to.equal(true)
                 	}
 
                 	it("should return false if only part of the word is guessed") {
-                    		guessManager.guess = "app"
-                    		expect(guessManager.correctlyGuessedFullWord(word)).to.equal(false)
+                    	let guess = "app"
+                    		expect(guessManager.correctlyGuessedFullWord(word, guess: guess)).to.equal(false)
                       	}
 
                     	it("should return false if the guess is incorrect") {
-                    		guessManager.guess = "banana"
-                    		expect(guessManager.correctlyGuessedFullWord(word)).to.equal(false)
+                    	let guess = "banana"
+                    		expect(guessManager.correctlyGuessedFullWord(word, guess: guess)).to.equal(false)
                 	}
             	}
 
                 describe("#appendWordPlaceholder") {
-			var word: String!
-			before() {
+			         var word: String!
+			         before() {
                         	word = "apple"
                     	}
 
                     	it("should add a placeholder to correctGuesses collection if the word is guessed") {
-                        	guessManager.guess = "apple"
-                        	guessManager.appendWordPlaceholder(word)
+                        let guess = "apple"
+                        	guessManager.appendWordPlaceholder(word, guess: guess)
                         	expect(guessManager.correctGuesses).to.contain("#")
                   	}
 
                   	it("should not add a placeholder to incorrectGuesses collection the word is guessed") {
-                        	guessManager.guess = "apple"
-                        	guessManager.appendWordPlaceholder(word)
-                        	expect(guessManager.incorrectGuesses).notTo.contain(guessManager.guess)
+                        let guess = "apple"
+                        	guessManager.appendWordPlaceholder(word, guess: guess)
+                        	expect(guessManager.incorrectGuesses).notTo.contain("#")
                   	}
 
                   	it("should add a placeholder to incorrectGuesses collection if the word is not guessed") {
-                        	guessManager.guess = "banana"
-                        	guessManager.appendWordPlaceholder(word)
+                        let guess = "banana"
+                        	guessManager.appendWordPlaceholder(word, guess: guess)
                         	expect(guessManager.incorrectGuesses).to.contain("#")
                   	}
 
                   	it("should not add a placeholder to correctGuesses collection if the word is not guessed") {
-                        	guessManager.guess = "banana"
-                        	guessManager.appendWordPlaceholder(word)
-                        	expect(guessManager.correctGuesses).notTo.contain(guessManager.guess)
+                        let guess = "banana"
+                        	guessManager.appendWordPlaceholder(word, guess: guess)
+                        	expect(guessManager.correctGuesses).notTo.contain("#")
                   	}
                 } 
 
@@ -136,27 +136,27 @@ class GuessManagerSpec: Swiftest.Spec {
                 	}
                 
                 	it("should add guess to correctGuesses collection if it is in the word") {
-                    		guessManager.guess = "a"
-                    		guessManager.appendGuess(word)
-                    		expect(guessManager.correctGuesses).to.contain(guessManager.guess)
+                    	let guess = "a"
+                    		guessManager.appendGuess(word, guess: guess)
+                    		expect(guessManager.correctGuesses).to.contain(guess)
                 	}
 
                 	it("should not add guess to incorrectGuesses collection if it is in the word") {
-                    		guessManager.guess = "a"
-                    		guessManager.appendGuess(word)
-                    		expect(guessManager.incorrectGuesses).notTo.contain(guessManager.guess)
+                    	let guess = "a"
+                    		guessManager.appendGuess(word, guess: guess)
+                    		expect(guessManager.incorrectGuesses).notTo.contain(guess)
                 	}
 
                 	it("should add guess to incorrectGuesses collection if it is not in the word") {
-                    		guessManager.guess = "b"
-                    		guessManager.appendGuess(word)
-                    		expect(guessManager.incorrectGuesses).to.contain(guessManager.guess)
+                    	let guess = "b"
+                    		guessManager.appendGuess(word, guess: guess)
+                    		expect(guessManager.incorrectGuesses).to.contain(guess)
                 	}
 
                 	it("should not add guess to correctGuesses collection if it is not in the word") {
-                    		guessManager.guess = "b"
-                    		guessManager.appendGuess(word)
-                    		expect(guessManager.correctGuesses).notTo.contain(guessManager.guess)
+                    	let guess = "b"
+                    		guessManager.appendGuess(word, guess: guess)
+                    		expect(guessManager.correctGuesses).notTo.contain(guess)
                 	}
 	    	}
 	}

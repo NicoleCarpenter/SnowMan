@@ -18,32 +18,49 @@ class GameSpec: Swiftest.Spec {
 		}
 
 		describe("#isGameOver") {
-			it( "should return true if winning conditions are met") {
+			it( "should return true if the final letter is guessed") {
 				guessManager.correctGuesses = ["a", "p", "l", "e"]
-				expect(game.isGameOver()).to.equal(true)
+				let guess = "x"
+				game.isGameOver(guess)
+				expect(game.gameOver).to.equal(true)
 			}
 
-			it( "should return true if no remaining guess conditions are met") {
-				guessManager.incorrectGuesses = ["c", "b", "d", "f", "g", "h"]
-				expect(game.isGameOver()).to.equal(true)
+			it( "should return true if the full word is guessed") {
+				guessManager.correctGuesses = ["a", "p", "l"]
+				let guess = "apple"
+				game.isGameOver(guess)
+				expect(game.gameOver).to.equal(true)
+			}
+
+			it( "should return true if no remaining guesses are left") {
+				guessManager.incorrectGuesses = ["c", "b", "d", "f", "g"]
+				let guess = "x"
+				game.isGameOver(guess)
+				expect(game.gameOver).to.equal(true)
 			}
             
 			it("should return false if there is not a winner and there are remaining guesses") {
 				guessManager.correctGuesses = ["a"]
 				guessManager.incorrectGuesses = ["b"]
-				expect(game.isGameOver()).to.equal(false)
+				let guess = "x"
+				game.isGameOver(guess)
+				expect(game.gameOver).to.equal(false)
 			}
 		}
 
 		describe("#isWinner") {
 			it("should return true if winning condition is met") {
 				guessManager.correctGuesses = ["a", "p", "l", "e"]
-				expect(game.isWinner()).to.equal(true)
+				let guess = "x"
+				game.isWinner(guess)
+				expect(game.winner).to.equal(true)
 			}
 
 			it("should return false if winning condition is not met") {
 				guessManager.correctGuesses = ["a", "p"]
-				expect(game.isWinner()).to.equal(false)
+				let guess = "x"
+				game.isWinner(guess)
+				expect(game.winner).to.equal(false)
 			}
 		}
 	}

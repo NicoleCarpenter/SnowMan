@@ -1,4 +1,4 @@
 public protocol Interactable {
 	func getUserInput() -> String
-	func display(linesToPrint: String)
+	func display(thingToPrint: String)
 }

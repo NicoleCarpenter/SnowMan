@@ -6,16 +6,12 @@ public class View: Viewable {
 	}
 
 	public func receiveGuess() -> String {
-		var guess = String(getGuessFromUser())
+		var guess = io.getUserInput()
 		while (guess == "" || !(containsOnlyLetters(guess))) {
 			io.display("Invalid guess. Please enter a lowercase letter or word.")
-			guess = getGuessFromUser()
+			guess = io.getUserInput()
 		} 
 		return guess
-	}
-
-	public func getGuessFromUser() -> String {
-		return io.getUserInput()
 	}
 
 	public func assignBlanks(gameWord: String, correctGuesses: [String]) -> String {
