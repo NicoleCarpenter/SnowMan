@@ -3,7 +3,7 @@ public class MockView: Viewable {
 	var assignBlanksCalled: Bool
 	var receiveGuessReturn: String!
 
-	public init(io: Interactable) {
+	public init() {
 		receiveGuessCalled = false
 		assignBlanksCalled = false
 	}
@@ -19,5 +19,17 @@ public class MockView: Viewable {
 
 	public func assignBlanks(gameWord: String, correctGuesses: [String]) {
 		assignBlanksCalled = true
+	}
+
+	public func displayRemainingGuesses(remainingGuesses: Int) {
+
+	}
+
+	public func displayWinningMessage(word: String) {
+
+	}
+
+	public func displayLosingMessage(word: String) {
+
 	}
 }

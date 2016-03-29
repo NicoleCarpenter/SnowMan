@@ -1,11 +1,11 @@
 public class Game {
 	var word: String
 	let guessManager: GuessManager
-	var view: View
+	var view: Viewable
 	public var gameOver: Bool
 	public var winner: Bool
 
-	public init(word: String, guessManager: GuessManager, view: View) {
+	public init(word: String, guessManager: GuessManager, view: Viewable) {
 		self.word = word
 		self.guessManager = guessManager
 		self.view = view
@@ -21,19 +21,13 @@ public class Game {
 	}
 
 	public func isGameOver(guess: String) {
-		if (guessManager.hasNoGuessesRemaining() || isWinner(guess)) {
-			self.gameOver = true
-		}
+		gameOver = guessManager.hasNoGuessesRemaining() || isWinner(guess)
 	}
 
 	public func isWinner(guess: String) -> Bool {
 		let letters = separateLetters()
-		if (guessManager.determineUnguessedLetters(letters).isEmpty || guessManager.correctlyGuessedFullWord(word, guess: guess)) {
-			self.winner = true
-			return true
-		} else {
-			return false			
-		}
+		winner = guessManager.determineUnguessedLetters(letters).isEmpty || guessManager.correctlyGuessedFullWord(word, guess: guess)
+		return winner
 
 	}
 
