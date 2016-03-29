@@ -101,7 +101,7 @@ class ViewSpec: Swiftest.Spec {
  	        	it("should print a congragulatory message if winning conditions met") {
 				let gameWord = "hello"
                     		io.stubPrintedOutput("Congratulations. You win! You correctly guessed \(gameWord)")
-                            view.displayWinningMessage(gameWord)
+	                        view.displayWinningMessage(gameWord)
 
                     		expect(io.displayCalled).to.equal(true)
                             	expect(io.getPrintedOutputStream).to.equal("Congratulations. You win! You correctly guessed hello")
