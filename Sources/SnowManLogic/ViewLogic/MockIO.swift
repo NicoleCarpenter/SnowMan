@@ -15,12 +15,8 @@ public class MockIO: Interactable {
 		return value
 	}
 
-	public func display(stubbedPrintedOutput: String) {
+	public func display(outputToPrint: String) {
+		self.getPrintedOutputStream = outputToPrint
 		displayCalled = true
 	}
-
-	public func stubPrintedOutput(getPrintedOutputStream: String) {
-		self.getPrintedOutputStream = getPrintedOutputStream
-	}
-
 }

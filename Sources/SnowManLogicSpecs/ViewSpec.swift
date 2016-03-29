@@ -44,37 +44,36 @@ class ViewSpec: Swiftest.Spec {
 
         	describe("#assignBlanks") {
             		var gameWord: String!
-            		var correctGuesses: [String]!
             
             		before() {
                 		gameWord = "hello"
-                		correctGuesses = []
             		}
             
             		it("should return only blanks for unguessed word") {
-	                        io.stubPrintedOutput("__  __  __  __  __")
+                            let correctGuesses: [String] = []
+                            let outputToPrint = "__  __  __  __  __ "
         	                view.assignBlanks(gameWord, correctGuesses: correctGuesses)
                 		
                 	        expect(io.displayCalled).to.equal(true)
-                        	expect(io.getPrintedOutputStream).to.equal("__  __  __  __  __")
+                        	expect(io.getPrintedOutputStream).to.equal(outputToPrint)
             		}
 
             		it("should return no blanks if the word has been guessed") {
-                		correctGuesses = ["h", "e", "l", "o"]
-                        	io.stubPrintedOutput("h e l l o")
+                		let correctGuesses = ["h", "e", "l", "o"]
+                        	let outputToPrint = "h e l l o"
                         	view.assignBlanks(gameWord, correctGuesses: correctGuesses)
                 		
                        		expect(io.displayCalled).to.equal(true)
-                        	expect(io.getPrintedOutputStream).to.equal("h e l l o")
+                        	expect(io.getPrintedOutputStream).to.equal(outputToPrint)
             		}
 
             		it("should return blanks and letters for partially guessed word") {
-                		correctGuesses = ["h", "e"]
-                        	io.stubPrintedOutput("h e --  --  --")
+                		let correctGuesses = ["h", "e"]
+                        	let outputToPrint = "h e __  __  __ "
                         	view.assignBlanks(gameWord, correctGuesses: correctGuesses)
                 		
                         	expect(io.displayCalled).to.equal(true)
-                        	expect(io.getPrintedOutputStream).to.equal("h e --  --  --")
+                        	expect(io.getPrintedOutputStream).to.equal(outputToPrint)
             		}
 
         	}
@@ -82,40 +81,40 @@ class ViewSpec: Swiftest.Spec {
 	        describe("#displayRemainingGuesses") {
         		it("should return the number of guesses remaining") {
                     		var remainingGuesses = 4
-                            	io.stubPrintedOutput("You have \(remainingGuesses) remaining guesses")
+                            	var outputToPrint = ("You have \(remainingGuesses) remaining guesses")
                             	view.displayRemainingGuesses(4)
                     		
                             	expect(io.displayCalled).to.equal(true)
-                            	expect(io.getPrintedOutputStream).to.equal("You have 4 remaining guesses")
+                            	expect(io.getPrintedOutputStream).to.equal(outputToPrint)
                 
                     		remainingGuesses = 0
-                    		io.stubPrintedOutput("You have \(remainingGuesses) remaining guesses")
+                    		outputToPrint = ("You have \(remainingGuesses) remaining guesses")
                             	view.displayRemainingGuesses(0)    
 
                             	expect(io.displayCalled).to.equal(true)
-                            	expect(io.getPrintedOutputStream).to.equal("You have 0 remaining guesses")
+                            	expect(io.getPrintedOutputStream).to.equal(outputToPrint)
                     	}
             	}
 
             	describe("#displayWinningMessage") {
  	        	it("should print a congragulatory message if winning conditions met") {
 				let gameWord = "hello"
-                    		io.stubPrintedOutput("Congratulations. You win! You correctly guessed \(gameWord)")
+                    		let outputToPrint = ("Congratulations. You win! You correctly guessed \"\(gameWord)\"")
 	                        view.displayWinningMessage(gameWord)
 
                     		expect(io.displayCalled).to.equal(true)
-                            	expect(io.getPrintedOutputStream).to.equal("Congratulations. You win! You correctly guessed hello")
+                            	expect(io.getPrintedOutputStream).to.equal(outputToPrint)
                 	}
             	}
 
             	describe("#displayLosingMessage") {
                 	it("should inform player of loss if winning conditions not met") {
                     		let gameWord = "hello"
-                            	io.stubPrintedOutput("Game Over. You ran out of guesses. The word was \(gameWord)")
+                            	let outputToPrint = ("Game Over. You ran out of guesses. The word was \"\(gameWord)\"")
                                 view.displayLosingMessage(gameWord)
 
                             	expect(io.displayCalled).to.equal(true)
-                            	expect(io.getPrintedOutputStream).to.equal("Game Over. You ran out of guesses. The word was hello")
+                            	expect(io.getPrintedOutputStream).to.equal(outputToPrint)
                 	}
             	}
   	}
