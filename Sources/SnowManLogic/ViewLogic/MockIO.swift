@@ -1,6 +1,7 @@
 public class MockIO: Interactable {
 	public var stubbedUserInput: [String]!
-	private var displayCalled: Bool
+	public var displayCalled: Bool
+	public var getPrintedOutputStream: String!
 	var counter: Int
 
 	public init() {
@@ -14,7 +15,12 @@ public class MockIO: Interactable {
 		return value
 	}
 
-	public func display(linesToPrint: String) {
+	public func display(stubbedPrintedOutput: String) {
 		displayCalled = true
 	}
+
+	public func stubPrintedOutput(getPrintedOutputStream: String) {
+		self.getPrintedOutputStream = getPrintedOutputStream
+	}
+
 }

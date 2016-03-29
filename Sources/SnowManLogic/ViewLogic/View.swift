@@ -14,7 +14,7 @@ public class View: Viewable {
 		return guess
 	}
 
-	public func assignBlanks(gameWord: String, correctGuesses: [String]) -> String {
+	public func assignBlanks(gameWord: String, correctGuesses: [String]) {
 		var blanks: [String] = []
 		let letters = gameWord.characters.map { String($0) }
 		
@@ -27,25 +27,18 @@ public class View: Viewable {
    		}
    		let assignedBlanks = blanks.joinWithSeparator(" ")
    		io.display(assignedBlanks)
-   		return assignedBlanks
 	}
 
-	public func displayRemainingGuesses(remainingGuesses: Int) -> String {
-		let message = "You have \(remainingGuesses) remaining guesses"
-		io.display(message)
-		return message
+	public func displayRemainingGuesses(remainingGuesses: Int) {
+		io.display("You have \(remainingGuesses) remaining guesses")
 	}
 
-	public func displayWinningMessage(word: String) -> String {
-		let message = "Congratulations. You win! You correctly guessed \"\(word)\""
-		io.display(message)
-		return message
+	public func displayWinningMessage(word: String) {
+		io.display("Congratulations. You win! You correctly guessed \"\(word)\"")
 	}
 
-	public func displayLosingMessage(word: String) -> String {
-		let message = "Game Over. You ran out of guesses. The word was \"\(word)\""
-		io.display(message)
-		return message
+	public func displayLosingMessage(word: String) {
+		io.display("Game Over. You ran out of guesses. The word was \"\(word)\"")
 	}
 
 	private func containsOnlyLetters(input: String) -> Bool {

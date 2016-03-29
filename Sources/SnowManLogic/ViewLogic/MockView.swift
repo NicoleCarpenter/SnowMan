@@ -1,44 +1,23 @@
 public class MockView: Viewable {
-	var io: Interactable 
-	var guess: String!
+	var receiveGuessCalled: Bool
+	var assignBlanksCalled: Bool
+	var receiveGuessReturn: String!
 
 	public init(io: Interactable) {
-		self.io = io
+		receiveGuessCalled = false
+		assignBlanksCalled = false
 	}
 
 	public func receiveGuess() -> String {
-		guess = String(getGuessFromUser())
-		if (guess == "" || !(containsOnlyLetters(guess))) {
-			return "false"
-		} 
-		return "true"
+		receiveGuessCalled = true
+		return receiveGuessReturn
 	}
 
-	public func assignBlanks(gameWord: String, correctGuesses: [String]) -> String {
-		var blanks = [String]()
-		let letters = gameWord.characters.map { String($0) }
-		
-		for letter in letters { 
-			if (correctGuesses.contains(letter)) { 
-				blanks.append(letter)  
-			} else { 
-				blanks.append("__ ") 
-			} 
-		}
-   		return blanks.joinWithSeparator(" ")
+	public func stubReceiveGuess(receiveGuessReturn: String) {
+		self.receiveGuessReturn = receiveGuessReturn
 	}
 
-
-	public func getGuessFromUser() -> String {
-		return io.getUserInput()
-	}
-
-	private func containsOnlyLetters(input: String) -> Bool {
-   		for character in input.characters {
-      			if (!(character >= "a" && character <= "z")) {
-         			return false
-      			}
-   		}
-   		return true
+	public func assignBlanks(gameWord: String, correctGuesses: [String]) {
+		assignBlanksCalled = true
 	}
 }

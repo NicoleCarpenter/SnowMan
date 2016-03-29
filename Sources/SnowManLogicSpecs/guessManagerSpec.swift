@@ -100,32 +100,34 @@ class GuessManagerSpec: Swiftest.Spec {
 
                 describe("#appendWordPlaceholder") {
 			         var word: String!
+                     var placeholder: String!
 			         before() {
                         	word = "apple"
+                            placeholder = "#"
                     	}
 
                     	it("should add a placeholder to correctGuesses collection if the word is guessed") {
                         let guess = "apple"
                         	guessManager.appendWordPlaceholder(word, guess: guess)
-                        	expect(guessManager.correctGuesses).to.contain("#")
+                        	expect(guessManager.correctGuesses).to.contain(placeholder)
                   	}
 
                   	it("should not add a placeholder to incorrectGuesses collection the word is guessed") {
                         let guess = "apple"
                         	guessManager.appendWordPlaceholder(word, guess: guess)
-                        	expect(guessManager.incorrectGuesses).notTo.contain("#")
+                        	expect(guessManager.incorrectGuesses).notTo.contain(placeholder)
                   	}
 
                   	it("should add a placeholder to incorrectGuesses collection if the word is not guessed") {
                         let guess = "banana"
                         	guessManager.appendWordPlaceholder(word, guess: guess)
-                        	expect(guessManager.incorrectGuesses).to.contain("#")
+                        	expect(guessManager.incorrectGuesses).to.contain(placeholder)
                   	}
 
                   	it("should not add a placeholder to correctGuesses collection if the word is not guessed") {
                         let guess = "banana"
                         	guessManager.appendWordPlaceholder(word, guess: guess)
-                        	expect(guessManager.correctGuesses).notTo.contain("#")
+                        	expect(guessManager.correctGuesses).notTo.contain(placeholder)
                   	}
                 } 
 
