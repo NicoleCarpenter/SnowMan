@@ -32,21 +32,20 @@ public class GuessManager {
 		return guess == word
 	}
 
-	public func appendWordPlaceholder(word: String, guess: String) {
-		let fullWordGuessPlaceholder = "#"
-		if (correctlyGuessedFullWord(word, guess: guess)) {
-			correctGuesses.append(fullWordGuessPlaceholder)
+	public func appendGuess(word: String, guess: String) {
+		if (isGuessingFullWord(guess)) {
+			addGuessToCollection(correctlyGuessedFullWord, word, guess)
 		} else {
-			incorrectGuesses.append(fullWordGuessPlaceholder)
+			addGuessToCollection(hasGuessInWord, word, guess)
 		}
 	}
 
-	public func appendGuess(word: String, guess: String) {
-		if (hasGuessInWord(word, guess: guess)) {
+	private func addGuessToCollection(correctlyGuessed: (String, String) -> Bool,  _ word: String, _ guess: String) {
+		if (correctlyGuessed(word, guess)) {
 			correctGuesses.append(guess)
 		} else {
 			incorrectGuesses.append(guess)
-		}
+		}		
 	}
 
 	private func hasGuessInWord(word: String, guess: String) -> Bool {

@@ -35,12 +35,7 @@ public class Game {
 		view.assignBlanks(word, correctGuesses: guessManager.correctGuesses)
 		let guess = view.receiveGuess()
 		
-		if (guessManager.isGuessingFullWord(guess)) {
-			guessManager.appendWordPlaceholder(word, guess: guess)
-		} else {
-			guessManager.appendGuess(word, guess: guess)
-		}
-
+		guessManager.appendGuess(word, guess: guess)
 		view.displayRemainingGuesses(guessManager.calculateRemainingGuesses())
 		isGameOver(guess)
 	}
