@@ -9,7 +9,7 @@ class GameSpec: Swiftest.Spec {
 		var word: String!
 
 		before() {
-			guessManager =  GuessManager(totalIncorrectGuessesAllowed: 5)
+			guessManager =  GuessManager(numberOfGuesses: 5)
 			word = "apple"
 			view = MockView()
 			game = Game(word: word, guessManager: guessManager, view: view)
@@ -17,6 +17,7 @@ class GameSpec: Swiftest.Spec {
 
 		describe("#playGame") {
 			it("should display a winning message if there is a winner") {
+				view.stubReceiveNumberOfGuesses("5")
 				view.stubReceiveGuess("apple")
 				game.playGame()
 
@@ -30,6 +31,7 @@ class GameSpec: Swiftest.Spec {
 			}
 
 			it("should display a losing message if there is not a winner") {
+				view.stubReceiveNumberOfGuesses("5")
 				view.stubReceiveGuess("b")
 				game.playGame()
 
@@ -43,6 +45,7 @@ class GameSpec: Swiftest.Spec {
 			}
 			
 			it("should display a losing message if the game is over before the player has made a move") {
+				view.stubReceiveNumberOfGuesses("5")
 				game.gameOver = true
 				game.playGame()
 
@@ -57,6 +60,10 @@ class GameSpec: Swiftest.Spec {
 		}
 
 		describe("#isGameOver") {
+			var numberOfGuesses: Int!
+			before() {
+				numberOfGuesses = 5
+			}
 			it("should return true if the final letter is guessed") {
 				guessManager.correctGuesses = ["a", "p", "l", "e"]
 				let guess = "x"

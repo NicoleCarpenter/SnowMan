@@ -9,10 +9,67 @@ class ViewSpec: Swiftest.Spec {
 			io = MockIO()
        		 	view = View(io: io)
         	}
+
+	        describe("#promptNumberOfGuesses") {
+        	        it("should print a prompt requesting number of guesses") {
+	                	let outputToPrint = "How many guesses do you want to have for this game?"
+        	            	view.promptNumberOfGuesses()
+
+                	    	expect(io.displayCalled).to.equal(true)
+                    		expect(io.getPrintedOutputStream).to.equal(outputToPrint)
+                	}
+            	}
         
-       		describe("#receiveGuess") {
+       		describe("#receiveNumberOfGuesses") {
+                	var errorValue: String!
+               		before() {
+                    	errorValue = "9999"
+                	}
+
+                	it("should return the user input if it is a valid number greater than 0") {
+                    		io.stubbedUserInput = ["5"]
+                    		expect(view.receiveNumberOfGuesses()).to.equal(5)
+                	}
+
+                	it("should return an error value if the user input is a letter") {
+                    		io.stubbedUserInput = ["a", errorValue]
+                    		expect(view.receiveNumberOfGuesses()).to.equal(Int(errorValue)!)
+                	}
+
+                	it("should return an error value if the user input is a word") {
+                    		io.stubbedUserInput = ["apple", errorValue]
+                    		expect(view.receiveNumberOfGuesses()).to.equal(Int(errorValue)!)
+                	}
+
+                	it("should return an error value if the user input is a non-numeric character") {
+                    		io.stubbedUserInput = ["a", errorValue]
+                    		expect(view.receiveNumberOfGuesses()).to.equal(Int(errorValue)!)
+                	}
+
+                	it("should return an error value if the user input is a combination of numbers and non-numbers") {
+                    		io.stubbedUserInput = ["5a", "a5", "5?", "?5", errorValue]
+                    		expect(view.receiveNumberOfGuesses()).to.equal(Int(errorValue)!)
+                	}
+
+                	it("should return an error value if the user input is not a whole number") {
+                    		io.stubbedUserInput = ["1.5", errorValue]
+                    		expect(view.receiveNumberOfGuesses()).to.equal(Int(errorValue)!)
+                	}
+
+                	it("should return an error value if the user input is zero") {
+                    		io.stubbedUserInput = ["0", errorValue]
+                    		expect(view.receiveNumberOfGuesses()).to.equal(Int(errorValue)!)
+                	}
+
+                	it("should return an error value if the user input is a negative number") {
+                    		io.stubbedUserInput = ["-1", errorValue]
+                    		expect(view.receiveNumberOfGuesses()).to.equal(Int(errorValue)!)
+                	}  
+            	}
+
+            	describe("#receiveGuess") {
         		it("should return the user input if it is a string of letters") {
-            		io.stubbedUserInput = ["hello"]
+            			io.stubbedUserInput = ["hello"]
                     		expect(view.receiveGuess()).to.equal("hello")
            		}
 
@@ -50,8 +107,8 @@ class ViewSpec: Swiftest.Spec {
             		}
             
             		it("should return only blanks for unguessed word") {
-                            let correctGuesses: [String] = []
-                            let outputToPrint = "__  __  __  __  __ "
+                            	let correctGuesses: [String] = []
+                            	let outputToPrint = "__  __  __  __  __ "
         	                view.assignBlanks(gameWord, correctGuesses: correctGuesses)
                 		
                 	        expect(io.displayCalled).to.equal(true)
@@ -97,7 +154,7 @@ class ViewSpec: Swiftest.Spec {
             	}
 
             	describe("#displayWinningMessage") {
- 	        	it("should print a congragulatory message if winning conditions met") {
+ 	        	it("should print a congratulatory message if winning conditions met") {
 				let gameWord = "hello"
                     		let outputToPrint = ("Congratulations. You win! You correctly guessed \"\(gameWord)\"")
 	                        view.displayWinningMessage(gameWord)

@@ -3,6 +3,20 @@ public class View: Viewable {
 
 	public init(io: Interactable) {
 		self.io = io
+		promptNumberOfGuesses()
+	}
+
+	public func promptNumberOfGuesses() {
+		io.display("How many guesses do you want to have for this game?")
+	}
+
+	public func receiveNumberOfGuesses() -> Int {
+		var numberOfGuesses = io.getUserInput()
+		while (numberOfGuesses == "" || !(validNumber(numberOfGuesses))) {
+			io.display("Invalid number. Please enter a number greater than 0")
+			numberOfGuesses = io.getUserInput()
+		}
+		return Int(numberOfGuesses)!
 	}
 
 	public func receiveGuess() -> String {
@@ -39,6 +53,10 @@ public class View: Viewable {
 
 	public func displayLosingMessage(word: String) {
 		io.display("Game Over. You ran out of guesses. The word was \"\(word)\"")
+	}
+
+	private func validNumber(input: String) -> Bool {
+		return Int(input) != nil && Int(input) > 0
 	}
 
 	private func containsOnlyLetters(input: String) -> Bool {
