@@ -99,11 +99,11 @@ class GuessManagerSpec: Swiftest.Spec {
             	}
 
                 describe("#appendWordPlaceholder") {
-			         var word: String!
-                     var placeholder: String!
-			         before() {
+			var word: String!
+                     	var placeholder: String!
+			before() {
                         	word = "apple"
-                            placeholder = "#"
+                            	placeholder = "#"
                     	}
 
                     	it("should add a placeholder to correctGuesses collection if the word is guessed") {
