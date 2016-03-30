@@ -18,11 +18,11 @@ public class View: Viewable {
 		return Int(maxNumberOfGuesses)!
 	}
 
-	public func receiveGuess() -> String {
-		var guess = io.getUserInput()
-		while (guess == "" || !(containsOnlyLetters(guess))) {
+	public func receiveGuess() -> Guess {
+		var guess = Guess(currentGuess: io.getUserInput())
+		while !(guess.isValid()) {
 			io.display("Invalid guess. Please enter a lowercase letter or word.")
-			guess = io.getUserInput()
+			guess = Guess(currentGuess: io.getUserInput())
 		} 
 		return guess
 	}
@@ -33,10 +33,10 @@ public class View: Viewable {
 		
 		for letter in letters { 
 			if (correctGuesses.contains(letter)) { 
-	           		blanks.append(letter)  
-       			} else { 
-           			blanks.append("__ ") 
-       			} 
+				blanks.append(letter)
+            		} else {
+				blanks.append("__ ")
+			} 
    		}
    		let assignedBlanks = blanks.joinWithSeparator(" ")
    		io.display(assignedBlanks)
@@ -44,6 +44,10 @@ public class View: Viewable {
 
 	public func displayRemainingGuesses(remainingGuesses: Int) {
 		io.display("You have \(remainingGuesses) remaining guesses")
+	}
+
+	public func displayIncorrectGuesses(incorrectGuesses: [String]) {
+		io.display("Incorrect guesses: \(incorrectGuesses.joinWithSeparator("  "))")
 	}
 
 	public func displayWinningMessage(word: String) {
@@ -56,14 +60,5 @@ public class View: Viewable {
 
 	private func validNumber(input: String) -> Bool {
 		return Int(input) != nil && Int(input) > 0
-	}
-
-	private func containsOnlyLetters(input: String) -> Bool {
-   		for character in input.characters {
-      			if (!(character >= "a" && character <= "z")) {
-         			return false
-      			}
-   		}
-   		return true
 	}
 }

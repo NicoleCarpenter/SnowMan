@@ -1,5 +1,4 @@
 public class IO: Interactable {
-
 	public init() {
 	}
 
