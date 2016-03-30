@@ -1,7 +1,7 @@
 import Swiftest
 
 Swiftest.register([
-  TestSpec.self
+  	DictionaryManagerSpec.self
 ])
 
 try Swiftest.run()
