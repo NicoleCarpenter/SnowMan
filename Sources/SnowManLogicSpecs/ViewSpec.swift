@@ -12,46 +12,51 @@ class ViewSpec: Swiftest.Spec {
         
        		describe("#receiveGuess") {
         		it("should return the user input if it is a string of letters") {
-            		io.stubbedUserInput = ["hello"]
-                    		expect(view.receiveGuess()).to.equal("hello")
+	            		io.stubbedUserInput = ["hello"]
+	                        let guess = view.receiveGuess()
+                    		expect(guess.currentGuess).to.equal("hello")
            		}
 
            		it("should return the user input if it is a single letter") {
                 		io.stubbedUserInput = ["a"]
-                		expect(view.receiveGuess()).to.equal("a")
+	                        let guess = view.receiveGuess()                        
+                		expect(guess.currentGuess).to.equal("a")
             		}
 
             		it("should return an error message if the user input is a number") {   
                 		io.stubbedUserInput = ["1", "fail"]
-                		expect(view.receiveGuess()).to.equal("fail")
+       		                let guess = view.receiveGuess()
+                		expect(guess.currentGuess).to.equal("fail")
             		}
 
                 	it("should return an error message if the user input is a non-letter character") {
                         	io.stubbedUserInput = ["?", "fail"]
-                        	expect(view.receiveGuess()).to.equal("fail")
+                	        let guess = view.receiveGuess()
+                        	expect(guess.currentGuess).to.equal("fail")
                     	}
 
                     	it("should return an error message if the user input is a combination of valid and invalid inputs") {
                         	io.stubbedUserInput = ["?a", "fail"]
-                        	expect(view.receiveGuess()).to.equal("fail")
+                            	let guess = view.receiveGuess()
+                        	expect(guess.currentGuess).to.equal("fail")
                     	}
 
                     	it("should return an error message if the user hits return") {
                         	io.stubbedUserInput = ["", "fail"]
-                        	expect(view.receiveGuess()).to.equal("fail")
+                            	let guess = view.receiveGuess()
+                        	expect(guess.currentGuess).to.equal("fail")
                     	}
         	}
 
         	describe("#assignBlanks") {
-            		var gameWord: String!
-            
+            		var gameWord: String!            
             		before() {
                 		gameWord = "hello"
             		}
             
             		it("should return only blanks for unguessed word") {
-                            let correctGuesses: [String] = []
-                            let outputToPrint = "__  __  __  __  __ "
+        	                let correctGuesses: [String] = []
+                	        let outputToPrint = "__  __  __  __  __ "
         	                view.assignBlanks(gameWord, correctGuesses: correctGuesses)
                 		
                 	        expect(io.displayCalled).to.equal(true)
@@ -79,22 +84,32 @@ class ViewSpec: Swiftest.Spec {
         	}
 
 	        describe("#displayRemainingGuesses") {
-        		it("should return the number of guesses remaining") {
-                    		var remainingGuesses = 4
-                            	var outputToPrint = ("You have \(remainingGuesses) remaining guesses")
-                            	view.displayRemainingGuesses(4)
+        		it("should return the number of guesses remaining if more than 0 guesses remain") {
+                    		let remainingGuesses = 4
+                            	view.displayRemainingGuesses(remainingGuesses)
                     		
                             	expect(io.displayCalled).to.equal(true)
-                            	expect(io.getPrintedOutputStream).to.equal(outputToPrint)
-                
-                    		remainingGuesses = 0
-                    		outputToPrint = ("You have \(remainingGuesses) remaining guesses")
-                            	view.displayRemainingGuesses(0)    
+                            	expect(io.getPrintedOutputStream).to.equal("You have \(remainingGuesses) remaining guesses")
+                        }
+
+                        it("should return 0 guesses remaining if no guesses remain") {
+                    		let remainingGuesses = 0
+                            	view.displayRemainingGuesses(remainingGuesses)    
 
                             	expect(io.displayCalled).to.equal(true)
-                            	expect(io.getPrintedOutputStream).to.equal(outputToPrint)
+                            	expect(io.getPrintedOutputStream).to.equal("You have \(remainingGuesses) remaining guesses")
                     	}
             	}
+
+                describe("#displayIncorrectGuesses") {
+	                it("should print out the incorrect guesses if there are any") {
+        	                var incorrectGuesses = ["a", "b", "apple"]
+                	        view.displayIncorrectGuesses(incorrectGuesses)
+
+                        	expect(io.displayCalled).to.equal(true)
+                        	expect(io.getPrintedOutputStream).to.equal("Incorrect guesses: \(incorrectGuesses.joinWithSeparator("  "))")
+                    	}
+                }
 
             	describe("#displayWinningMessage") {
  	        	it("should print a congragulatory message if winning conditions met") {

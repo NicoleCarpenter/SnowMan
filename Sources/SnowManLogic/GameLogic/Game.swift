@@ -20,13 +20,13 @@ public class Game {
 		displayResults()
 	}
 
-	public func isGameOver(guess: String) {
+	public func isGameOver(guess: Guess) {
 		gameOver = guessManager.hasNoGuessesRemaining() || isWinner(guess)
 	}
 
-	public func isWinner(guess: String) -> Bool {
+	public func isWinner(guess: Guess) -> Bool {
 		let letters = separateLetters()
-		winner = guessManager.determineUnguessedLetters(letters).isEmpty || guessManager.correctlyGuessedFullWord(word, guess: guess)
+		winner = allLettersGuessed(letters) || guess.isCorrectlyGuessedFullWord(word)
 		return winner
 
 	}
@@ -36,12 +36,19 @@ public class Game {
 		let guess = view.receiveGuess()
 		
 		guessManager.appendGuess(word, guess: guess)
+
+		let incorrectGuesses = guessManager.incorrectGuesses
 		view.displayRemainingGuesses(guessManager.calculateRemainingGuesses())
+		view.displayIncorrectGuesses(incorrectGuesses)
 		isGameOver(guess)
 	}
 
 	private func separateLetters() -> [String] {
 		return word.characters.map { String($0) }
+	}
+
+	private func allLettersGuessed(letters: [String]) -> Bool {
+		return guessManager.determineUnguessedLetters(letters).isEmpty
 	}
 
 	private func displayResults() {

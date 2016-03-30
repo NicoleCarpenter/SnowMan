@@ -5,11 +5,11 @@ public class View: Viewable {
 		self.io = io
 	}
 
-	public func receiveGuess() -> String {
-		var guess = io.getUserInput()
-		while (guess == "" || !(containsOnlyLetters(guess))) {
+	public func receiveGuess() -> Guess {
+		var guess = Guess(currentGuess: io.getUserInput())
+		while !(guess.isValid()) {
 			io.display("Invalid guess. Please enter a lowercase letter or word.")
-			guess = io.getUserInput()
+			guess = Guess(currentGuess: io.getUserInput())
 		} 
 		return guess
 	}
@@ -33,20 +33,15 @@ public class View: Viewable {
 		io.display("You have \(remainingGuesses) remaining guesses")
 	}
 
+	public func displayIncorrectGuesses(incorrectGuesses: [String]) {
+		io.display("Incorrect guesses: \(incorrectGuesses.joinWithSeparator("  "))")
+	}
+
 	public func displayWinningMessage(word: String) {
 		io.display("Congratulations. You win! You correctly guessed \"\(word)\"")
 	}
 
 	public func displayLosingMessage(word: String) {
 		io.display("Game Over. You ran out of guesses. The word was \"\(word)\"")
-	}
-
-	private func containsOnlyLetters(input: String) -> Bool {
-   		for character in input.characters {
-      			if (!(character >= "a" && character <= "z")) {
-         			return false
-      			}
-   		}
-   		return true
 	}
 }

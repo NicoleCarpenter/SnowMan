@@ -24,31 +24,11 @@ public class GuessManager {
 		return totalIncorrectGuessesAllowed - incorrectGuesses.count
 	}
 
-	public func isGuessingFullWord(guess: String) -> Bool {
-		return guess.characters.count > 1
-	}
-
-	public func correctlyGuessedFullWord(word: String, guess: String) -> Bool {
-		return guess == word
-	}
-
-	public func appendGuess(word: String, guess: String) {
-		if (isGuessingFullWord(guess)) {
-			addGuessToCollection(correctlyGuessedFullWord, word, guess)
+	public func appendGuess(word: String, guess: Guess) {
+		if guess.isCorrect(word) {
+			correctGuesses.append(guess.currentGuess)
 		} else {
-			addGuessToCollection(hasGuessInWord, word, guess)
+			incorrectGuesses.append(guess.currentGuess)
 		}
-	}
-
-	private func addGuessToCollection(correctlyGuessed: (String, String) -> Bool,  _ word: String, _ guess: String) {
-		if (correctlyGuessed(word, guess)) {
-			correctGuesses.append(guess)
-		} else {
-			incorrectGuesses.append(guess)
-		}		
-	}
-
-	private func hasGuessInWord(word: String, guess: String) -> Bool {
-		return word.lowercaseString.characters.contains(Character(guess))
 	}
 }
