@@ -3,11 +3,11 @@ import PackageDescription
 let package = Package(
   	name: "SnowMan",
   	targets: [
-	  	Target(name: "SnowManDictionary"),
-  		Target(name: "SnowManLogic"),
- 		Target(name: "snowman", dependencies: ["SnowManLogic", "SnowManDictionary"]),
- 		Target(name: "SnowManDictionarySpecs", dependencies: ["SnowManDictionary"]),
- 		Target(name: "SnowManLogicSpecs", dependencies: ["SnowManLogic"]),
+	  	Target(name: "WordList"),
+  		Target(name: "Application"),
+ 		Target(name: "snowman", dependencies: ["Application", "WordList"]),
+ 		Target(name: "WordListSpecs", dependencies: ["WordList"]),
+ 		Target(name: "ApplicationSpecs", dependencies: ["Application"]),
   	],
   	dependencies: [
   		.Package(url: "https://github.com/bppr/Swiftest.git", Version(0,1,8))

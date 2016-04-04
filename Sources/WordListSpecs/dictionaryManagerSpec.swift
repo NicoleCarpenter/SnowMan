@@ -1,4 +1,4 @@
-import SnowManDictionary
+import WordList
 import Swiftest
 
 class DictionaryManagerSpec: Swiftest.Spec {

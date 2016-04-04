@@ -1,4 +1,4 @@
-import SnowManLogic
+import Application
 import Swiftest
 
 class ViewSpec: Swiftest.Spec {

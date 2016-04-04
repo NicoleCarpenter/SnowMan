@@ -1,13 +1,14 @@
-import SnowManLogic
-import SnowManDictionary
+import Application
+import WordList
 
-let dictionaryManager = DictionaryManager(words: SnowManDictionary.words) 
+let dictionaryManager = DictionaryManager(words: WordList.words)
 let word = dictionaryManager.getRandomWord()
 
 let io = IO()
 
 let view = View(io: io)
 
+view.promptNumberOfGuesses()
 let numberOfGuesses = view.receiveNumberOfGuesses()
 let guessManager = GuessManager(numberOfGuesses: numberOfGuesses)
 

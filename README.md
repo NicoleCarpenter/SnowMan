@@ -20,7 +20,7 @@ swift build
 Then run the application. 
 
 ```swift
-.build/debug/Application
+.build/debug/snowman
 ``` 
 
 
@@ -32,5 +32,6 @@ swift build
 ``` 
 To run all tests in the application, run the command 
 ```swift
-.build/debug/Specs
+.build/debug/WordListSpecs
+.build/debug/ApplicationSpecs
 ``` 
