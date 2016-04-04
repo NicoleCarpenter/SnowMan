@@ -3,20 +3,19 @@ public class View: Viewable {
 
 	public init(io: Interactable) {
 		self.io = io
-		promptNumberOfGuesses()
 	}
 
-	public func promptNumberOfGuesses() {
+	public func promptMaxNumberOfGuesses() {
 		io.display("How many guesses do you want to have for this game?")
 	}
 
-	public func receiveNumberOfGuesses() -> Int {
-		var numberOfGuesses = io.getUserInput()
-		while (numberOfGuesses == "" || !(validNumber(numberOfGuesses))) {
+	public func receiveMaxNumberOfGuesses() -> Int {
+		var maxNumberOfGuesses = io.getUserInput()
+		while (maxNumberOfGuesses == "" || !(validNumber(maxNumberOfGuesses))) {
 			io.display("Invalid number. Please enter a number greater than 0")
-			numberOfGuesses = io.getUserInput()
+			maxNumberOfGuesses = io.getUserInput()
 		}
-		return Int(numberOfGuesses)!
+		return Int(maxNumberOfGuesses)!
 	}
 
 	public func receiveGuess() -> String {

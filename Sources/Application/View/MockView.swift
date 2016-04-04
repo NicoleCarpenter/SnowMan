@@ -1,17 +1,17 @@
 public class MockView: Viewable {
-	public var promptNumberOfGuessesCalled: Bool
-	public var receiveNumberOfGuessesCalled: Bool
+	public var promptMaxNumberOfGuessesCalled: Bool
+	public var receiveMaxNumberOfGuessesCalled: Bool
 	public var receiveGuessCalled: Bool
 	public var assignBlanksCalled: Bool
 	public var displayRemainingGuessesCalled: Bool
 	public var displayWinningMessageCalled: Bool
 	public var displayLosingMessageCalled: Bool
-	var receiveNumberOfGuessesReturn: Int!
-	var receiveGuessReturn: String!
+	public var receiveMaxNumberOfGuessesReturn: Int!
+	public var receiveGuessReturn: String!
 
 	public init() {
-		promptNumberOfGuessesCalled = false
-		receiveNumberOfGuessesCalled = false
+		promptMaxNumberOfGuessesCalled = false
+		receiveMaxNumberOfGuessesCalled = false
 		receiveGuessCalled = false
 		assignBlanksCalled = false
 		displayRemainingGuessesCalled = false
@@ -19,17 +19,17 @@ public class MockView: Viewable {
 		displayLosingMessageCalled = false
 	}
 
-	public func promptNumberOfGuesses() {
-		self.promptNumberOfGuessesCalled = true
+	public func promptMaxNumberOfGuesses() {
+		self.promptMaxNumberOfGuessesCalled = true
 	}
 
-	public func receiveNumberOfGuesses() -> Int {
-		receiveNumberOfGuessesCalled = true
-		return receiveNumberOfGuessesReturn
+	public func receiveMaxNumberOfGuesses() -> Int {
+		receiveMaxNumberOfGuessesCalled = true
+		return receiveMaxNumberOfGuessesReturn
 	}
 
-	public func stubReceiveNumberOfGuesses(receiveNumberOfGuessesReturn: String) {
-		self.receiveNumberOfGuessesReturn = Int(receiveNumberOfGuessesReturn)
+	public func stubReceiveMaxNumberOfGuesses(receiveMaxNumberOfGuessesReturn: String) {
+		self.receiveMaxNumberOfGuessesReturn = Int(receiveMaxNumberOfGuessesReturn)
 	}
 
 	public func receiveGuess() -> String {

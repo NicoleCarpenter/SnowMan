@@ -5,7 +5,7 @@ class GuessManagerSpec: Swiftest.Spec {
   	let spec = describe("guess logic") {
 	        var guessManager: GuessManager!
         	before() {
-        		guessManager = GuessManager(numberOfGuesses: 5)
+        		guessManager = GuessManager()
        		}
     
     		describe("#determineUnguessedLetters") {
@@ -31,32 +31,41 @@ class GuessManagerSpec: Swiftest.Spec {
     		}
 
     		describe("#hasNoGuessesRemaining") {
-    			it("should return true if no guesses remain") {
+	                var maxNumberOfGuesses: Int!
+        	        before() {
+	        	        maxNumberOfGuesses = 5
+                	}
 
+    			it("should return true if no guesses remain") {
     				guessManager.incorrectGuesses = ["c", "b", "d", "f", "g"]
-    				expect(guessManager.hasNoGuessesRemaining()).to.equal(true)
+    				expect(guessManager.hasNoGuessesRemaining(maxNumberOfGuesses)).to.equal(true)
     			}
 
     			it("should return false if there are still remaining guesses") {
     				guessManager.incorrectGuesses = ["c"]
-    				expect(guessManager.hasNoGuessesRemaining()).to.equal(false)
+    				expect(guessManager.hasNoGuessesRemaining(maxNumberOfGuesses)).to.equal(false)
     			}
     		}
 
 	        describe("#calculateRemainingGuesses") {
+    		        var maxNumberOfGuesses: Int!
+                	before() {
+        	        	maxNumberOfGuesses = 5
+                	}
+
         	        it("should return the number of guesses allowed if no incorrect guesses have been made") {
                 		guessManager.incorrectGuesses = []
-                    		expect(guessManager.calculateRemainingGuesses()).to.equal(5)
+                    		expect(guessManager.calculateRemainingGuesses(maxNumberOfGuesses)).to.equal(5)
                 	}
 
                 	it("should return the difference between guesses allowed and incorrect guesses") {
                     		guessManager.incorrectGuesses = ["c", "b"]
-                    		expect(guessManager.calculateRemainingGuesses()).to.equal(3)
+                    		expect(guessManager.calculateRemainingGuesses(maxNumberOfGuesses)).to.equal(3)
                 	}
 
                 	it("should return the difference between guesses allowed and incorrect guesses") {
                     		guessManager.incorrectGuesses = ["c", "b", "d", "f", "g", "h"]
-                    		expect(guessManager.calculateRemainingGuesses()).to.equal(-1)
+                    		expect(guessManager.calculateRemainingGuesses(maxNumberOfGuesses)).to.equal(-1)
                 	}
             	}
 

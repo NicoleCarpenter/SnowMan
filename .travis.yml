@@ -1,0 +1,11 @@
+language: objective-c
+osx_image: xcode7.3
+before_install:
+  - export SWIFT_VERSION=swift-DEVELOPMENT-SNAPSHOT-2016-03-01-a
+  - curl -O https://swift.org/builds/development/xcode/$SWIFT_VERSION/$SWIFT_VERSION-osx.pkg
+  - sudo installer -pkg $SWIFT_VERSION-osx.pkg -target /
+  - export TOOLCHAINS=swift
+script:
+  - swift build
+  - .build/debug/SnowManDictionarySpecs
+  - .build/debug/SnowManLogicSpecs

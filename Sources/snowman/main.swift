@@ -8,10 +8,11 @@ let io = IO()
 
 let view = View(io: io)
 
-view.promptNumberOfGuesses()
-let numberOfGuesses = view.receiveNumberOfGuesses()
-let guessManager = GuessManager(numberOfGuesses: numberOfGuesses)
+let guessManager = GuessManager()
 
-let game = Game(word: word, guessManager: guessManager, view: view)
+let gameSetup = GameSetup(view: view)
+let maxNumberOfGuesses = gameSetup.getMaxNumberOfGuesses()
+
+let game = Game(word: word, guessManager: guessManager, view: view, maxNumberOfGuesses: maxNumberOfGuesses)
 
 game.playGame()

@@ -1,6 +1,6 @@
 public protocol Viewable {
-	func promptNumberOfGuesses()
-	func receiveNumberOfGuesses() -> Int
+	func promptMaxNumberOfGuesses()
+	func receiveMaxNumberOfGuesses() -> Int
 	func receiveGuess() -> String
 	func assignBlanks(gameWord: String, correctGuesses: [String])
 	func displayRemainingGuesses(remainingGuesses: Int)
