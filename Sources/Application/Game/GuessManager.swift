@@ -1,10 +1,8 @@
 public class GuessManager {
-	public var totalIncorrectGuessesAllowed: Int
 	public var correctGuesses: [String]
 	public var incorrectGuesses: [String]
 
-	public init (totalIncorrectGuessesAllowed: Int) {
-		self.totalIncorrectGuessesAllowed = totalIncorrectGuessesAllowed
+	public init () {
 		correctGuesses = []
 		incorrectGuesses = []
 	}
@@ -15,13 +13,12 @@ public class GuessManager {
 		return setLetters.subtract(setCorrectGuesses)
 	}
 
-	public func hasNoGuessesRemaining() -> Bool {
-		let remainingGuesses = calculateRemainingGuesses()
-		return remainingGuesses <= 0
+	public func hasNoGuessesRemaining(maxNumberOfGuesses: Int) -> Bool {
+		return calculateRemainingGuesses(maxNumberOfGuesses) <= 0
 	}
 
-	public func calculateRemainingGuesses() -> Int {
-		return totalIncorrectGuessesAllowed - incorrectGuesses.count
+	public func calculateRemainingGuesses(maxNumberOfGuesses: Int) -> Int {
+		return maxNumberOfGuesses - incorrectGuesses.count
 	}
 
 	public func isGuessingFullWord(guess: String) -> Bool {

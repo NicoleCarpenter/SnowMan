@@ -5,6 +5,19 @@ public class View: Viewable {
 		self.io = io
 	}
 
+	public func promptMaxNumberOfGuesses() {
+		io.display("How many guesses do you want to have for this game?")
+	}
+
+	public func receiveMaxNumberOfGuesses() -> Int {
+		var maxNumberOfGuesses = io.getUserInput()
+		while (maxNumberOfGuesses == "" || !(validNumber(maxNumberOfGuesses))) {
+			io.display("Invalid number. Please enter a number greater than 0")
+			maxNumberOfGuesses = io.getUserInput()
+		}
+		return Int(maxNumberOfGuesses)!
+	}
+
 	public func receiveGuess() -> String {
 		var guess = io.getUserInput()
 		while (guess == "" || !(containsOnlyLetters(guess))) {
@@ -39,6 +52,10 @@ public class View: Viewable {
 
 	public func displayLosingMessage(word: String) {
 		io.display("Game Over. You ran out of guesses. The word was \"\(word)\"")
+	}
+
+	private func validNumber(input: String) -> Bool {
+		return Int(input) != nil && Int(input) > 0
 	}
 
 	private func containsOnlyLetters(input: String) -> Bool {

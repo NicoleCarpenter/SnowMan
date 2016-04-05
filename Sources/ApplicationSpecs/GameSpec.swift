@@ -1,18 +1,20 @@
-import SnowManLogic
+import Application
 import Swiftest
 
 class GameSpec: Swiftest.Spec {
 	let spec = describe("game logic") {
 		var guessManager: GuessManager!
-		var view: MockView!
-		var game: Game!
 		var word: String!
+		var view: MockView!
+		var maxNumberOfGuesses: Int!
+		var game: Game!
 
 		before() {
-			guessManager =  GuessManager(totalIncorrectGuessesAllowed: 5)
+			guessManager =  GuessManager()
 			word = "apple"
 			view = MockView()
-			game = Game(word: word, guessManager: guessManager, view: view)
+			maxNumberOfGuesses = 5
+			game = Game(word: word, guessManager: guessManager, view: view, maxNumberOfGuesses: maxNumberOfGuesses)
 		}
 
 		describe("#playGame") {
@@ -25,6 +27,7 @@ class GameSpec: Swiftest.Spec {
 				expect(view.displayRemainingGuessesCalled).to.equal(true)
 				expect(view.displayWinningMessageCalled).to.equal(true)
 				expect(view.displayLosingMessageCalled).to.equal(false)
+				expect(view.receiveGuessReturn).to.equal("apple")
 				expect(game.winner).to.equal(true)
 				expect(game.gameOver).to.equal(true)
 			}
@@ -38,6 +41,7 @@ class GameSpec: Swiftest.Spec {
 				expect(view.displayRemainingGuessesCalled).to.equal(true)
 				expect(view.displayWinningMessageCalled).to.equal(false)
 				expect(view.displayLosingMessageCalled).to.equal(true)
+				expect(view.receiveGuessReturn).to.equal("b")
 				expect(game.winner).to.equal(false)
 				expect(game.gameOver).to.equal(true)
 			}
@@ -57,6 +61,10 @@ class GameSpec: Swiftest.Spec {
 		}
 
 		describe("#isGameOver") {
+			var maxNumberOfGuesses: Int!
+			before() {
+				maxNumberOfGuesses = 5
+			}
 			it("should return true if the final letter is guessed") {
 				guessManager.correctGuesses = ["a", "p", "l", "e"]
 				let guess = "x"

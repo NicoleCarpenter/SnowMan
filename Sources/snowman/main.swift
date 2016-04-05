@@ -1,12 +1,18 @@
-import SnowManLogic
-import SnowManDictionary
+import Application
+import WordList
 
-let dictionaryManager = DictionaryManager(words: SnowManDictionary.words) 
-let guessManager = GuessManager(totalIncorrectGuessesAllowed: 10)
+let dictionaryManager = DictionaryManager(words: WordList.words)
 let word = dictionaryManager.getRandomWord()
 
 let io = IO()
+
 let view = View(io: io)
-let game = Game(word: word, guessManager: guessManager, view: view)
+
+let guessManager = GuessManager()
+
+let gameSetup = GameSetup(view: view)
+let maxNumberOfGuesses = gameSetup.getMaxNumberOfGuesses()
+
+let game = Game(word: word, guessManager: guessManager, view: view, maxNumberOfGuesses: maxNumberOfGuesses)
 
 game.playGame()

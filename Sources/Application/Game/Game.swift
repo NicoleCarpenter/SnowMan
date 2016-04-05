@@ -1,14 +1,16 @@
 public class Game {
-	var word: String
+	let word: String
 	let guessManager: GuessManager
-	var view: Viewable
+	let view: Viewable
+	let maxNumberOfGuesses: Int
 	public var gameOver: Bool
 	public var winner: Bool
 
-	public init(word: String, guessManager: GuessManager, view: Viewable) {
+	public init(word: String, guessManager: GuessManager, view: Viewable, maxNumberOfGuesses: Int) {
 		self.word = word
 		self.guessManager = guessManager
 		self.view = view
+		self.maxNumberOfGuesses = maxNumberOfGuesses
 		gameOver = false
 		winner = false
 	}
@@ -21,7 +23,7 @@ public class Game {
 	}
 
 	public func isGameOver(guess: String) {
-		gameOver = guessManager.hasNoGuessesRemaining() || isWinner(guess)
+		gameOver = guessManager.hasNoGuessesRemaining(maxNumberOfGuesses) || isWinner(guess)
 	}
 
 	public func isWinner(guess: String) -> Bool {
@@ -41,7 +43,7 @@ public class Game {
 			guessManager.appendGuess(word, guess: guess)
 		}
 
-		view.displayRemainingGuesses(guessManager.calculateRemainingGuesses())
+		view.displayRemainingGuesses(guessManager.calculateRemainingGuesses(maxNumberOfGuesses))
 		isGameOver(guess)
 	}
 
