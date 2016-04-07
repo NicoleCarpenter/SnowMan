@@ -7,5 +7,5 @@ before_install:
   - export TOOLCHAINS=swift
 script:
   - swift build
-  - .build/debug/SnowManDictionarySpecs
-  - .build/debug/SnowManLogicSpecs
+  - .build/debug/ApplicationSpecs
+  - .build/debug/WordListSpecs

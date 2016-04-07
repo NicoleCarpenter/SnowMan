@@ -1,5 +1,7 @@
 # SnowMan
 
+[![Build Status](https://travis-ci.org/NicoleCarpenter/SnowMan.svg?branch=master)](https://travis-ci.org/NicoleCarpenter/SnowMan)
+
 Snowman is a Swift console application. The object of the game is to guess the given word or phrase before the snowman "melts". With each incorrect guess, the snowman will lose one of its snowman features until he is but a puddle. 
 
 ## Requirements
