@@ -22,33 +22,32 @@ public class Game {
 		displayResults()
 	}
 
-	public func isGameOver(guess: String) {
+	public func isGameOver(guess: Guess) {
 		gameOver = guessManager.hasNoGuessesRemaining(maxNumberOfGuesses) || isWinner(guess)
 	}
 
-	public func isWinner(guess: String) -> Bool {
+	public func isWinner(guess: Guess) -> Bool {
 		let letters = separateLetters()
-		winner = guessManager.determineUnguessedLetters(letters).isEmpty || guessManager.correctlyGuessedFullWord(word, guess: guess)
+		winner = hasAllLettersGuessed(letters) || guess.isCorrectlyGuessedFullWord(word)
 		return winner
-
 	}
 
 	private func playerTurn() {		
 		view.assignBlanks(word, correctGuesses: guessManager.correctGuesses)
 		let guess = view.receiveGuess()
-		
-		if (guessManager.isGuessingFullWord(guess)) {
-			guessManager.appendWordPlaceholder(word, guess: guess)
-		} else {
-			guessManager.appendGuess(word, guess: guess)
-		}
-
+		guessManager.appendGuess(word, guess: guess)
+		let incorrectGuesses = guessManager.incorrectGuesses
 		view.displayRemainingGuesses(guessManager.calculateRemainingGuesses(maxNumberOfGuesses))
+		view.displayIncorrectGuesses(incorrectGuesses)
 		isGameOver(guess)
 	}
 
 	private func separateLetters() -> [String] {
 		return word.characters.map { String($0) }
+	}
+
+	private func hasAllLettersGuessed(letters: [String]) -> Bool {
+		return guessManager.determineUnguessedLetters(letters).isEmpty
 	}
 
 	private func displayResults() {
