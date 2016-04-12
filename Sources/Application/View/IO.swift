@@ -1,3 +1,5 @@
+import OS
+
 public class IO: Interactable {
 	public init() {
 	}
@@ -10,4 +12,7 @@ public class IO: Interactable {
 		print(linesToPrint)
 	}
 
+	public func clear() {
+		system("clear")
+	}
 }

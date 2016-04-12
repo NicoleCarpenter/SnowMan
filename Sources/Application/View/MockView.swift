@@ -2,11 +2,13 @@ public class MockView: Viewable {
 	public var promptMaxNumberOfGuessesCalled: Bool
 	public var receiveMaxNumberOfGuessesCalled: Bool
 	public var receiveGuessCalled: Bool
-	public var assignBlanksCalled: Bool
+	public var displayImageCalled: Bool
+	public var displayBlanksCalled: Bool
 	public var displayRemainingGuessesCalled: Bool
 	public var displayIncorrectGuessesCalled: Bool
 	public var displayWinningMessageCalled: Bool
 	public var displayLosingMessageCalled: Bool
+	public var clearScreenCalled: Bool
 	public var receiveMaxNumberOfGuessesReturn: Int!
 	public var receiveGuessReturn: Guess!
 
@@ -14,11 +16,13 @@ public class MockView: Viewable {
 		promptMaxNumberOfGuessesCalled = false
 		receiveMaxNumberOfGuessesCalled = false
 		receiveGuessCalled = false
-		assignBlanksCalled = false
+		displayImageCalled = false
+		displayBlanksCalled = false
 		displayRemainingGuessesCalled = false
 		displayIncorrectGuessesCalled = false
 		displayWinningMessageCalled = false
 		displayLosingMessageCalled = false
+		clearScreenCalled = true
 	}
 
 	public func promptMaxNumberOfGuesses() {
@@ -43,8 +47,12 @@ public class MockView: Viewable {
 		self.receiveGuessReturn = Guess(currentGuess: receiveGuessReturn)
 	}
 
-	public func assignBlanks(gameWord: String, correctGuesses: [String]) {
-		assignBlanksCalled = true
+	public func displayImage(image: [String], remainingGuesses: Int, maxNumberOfGuesses: Int) {
+		displayImageCalled = true
+	}
+
+	public func displayBlanks(gameWord: String, correctGuesses: [String]) {
+		displayBlanksCalled = true
 	}
 
 	public func displayRemainingGuesses(remainingGuesses: Int) {
@@ -61,5 +69,9 @@ public class MockView: Viewable {
 
 	public func displayLosingMessage(word: String) {
 		displayLosingMessageCalled = true
+	}
+
+	public func clearScreen() {
+		clearScreenCalled = true
 	}
 }

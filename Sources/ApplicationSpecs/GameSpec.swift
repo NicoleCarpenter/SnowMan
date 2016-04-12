@@ -22,7 +22,8 @@ class GameSpec: Swiftest.Spec {
 				view.stubReceiveGuess("apple")
 				game.playGame()
 
-				expect(view.assignBlanksCalled).to.equal(true)
+				expect(view.displayImageCalled).to.equal(true)
+				expect(view.displayBlanksCalled).to.equal(true)
 				expect(view.receiveGuessCalled).to.equal(true)
 				expect(view.displayRemainingGuessesCalled).to.equal(true)
 				expect(view.displayIncorrectGuessesCalled).to.equal(true)
@@ -37,7 +38,8 @@ class GameSpec: Swiftest.Spec {
 				view.stubReceiveGuess("b")
 				game.playGame()
 
-				expect(view.assignBlanksCalled).to.equal(true)
+				expect(view.displayImageCalled).to.equal(true)
+				expect(view.displayBlanksCalled).to.equal(true)
 				expect(view.receiveGuessCalled).to.equal(true)
 				expect(view.displayRemainingGuessesCalled).to.equal(true)
 				expect(view.displayIncorrectGuessesCalled).to.equal(true)
@@ -47,12 +49,13 @@ class GameSpec: Swiftest.Spec {
 				expect(game.winner).to.equal(false)
 				expect(game.gameOver).to.equal(true)
 			}
-			
+
 			it("should display a losing message if the game is over before the player has made a move") {
 				game.gameOver = true
 				game.playGame()
 
-				expect(view.assignBlanksCalled).to.equal(false)
+				expect(view.displayImageCalled).to.equal(true)
+				expect(view.displayBlanksCalled).to.equal(false)
 				expect(view.receiveGuessCalled).to.equal(false)
 				expect(view.displayRemainingGuessesCalled).to.equal(false)
 				expect(view.displayIncorrectGuessesCalled).to.equal(false)
@@ -88,7 +91,7 @@ class GameSpec: Swiftest.Spec {
 				game.isGameOver(guess)
 				expect(game.gameOver).to.equal(true)
 			}
-            
+
 			it("should return false if there is not a winner and there are remaining guesses") {
 				guessManager.correctGuesses = ["a"]
 				guessManager.incorrectGuesses = ["b"]
