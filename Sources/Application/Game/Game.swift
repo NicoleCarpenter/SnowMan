@@ -28,8 +28,7 @@ public class Game {
 	}
 
 	public func isWinner(guess: Guess) -> Bool {
-		let letters = separateLetters()
-		winner = hasAllLettersGuessed(letters) || guess.isCorrectlyGuessedFullWord(word)
+		winner = hasAllLettersGuessed() || guess.isCorrectlyGuessedFullWord(word)
 		return winner
 	}
 
@@ -40,7 +39,6 @@ public class Game {
 
 	private func playerTurn() {
 		view.displayBlanks(word, correctGuesses: guessManager.correctGuesses)
-
 		let guess = view.receiveGuess()
 		guessManager.appendGuess(word, guess: guess)
 		let remainingGuesses = guessManager.calculateRemainingGuesses(maxNumberOfGuesses)
@@ -53,12 +51,8 @@ public class Game {
 		isGameOver(guess)
 	}
 
-	private func separateLetters() -> [String] {
-		return word.characters.map { String($0) }
-	}
-
-	private func hasAllLettersGuessed(letters: [String]) -> Bool {
-		return guessManager.determineUnguessedLetters(letters).isEmpty
+	private func hasAllLettersGuessed() -> Bool {
+		return guessManager.determineUnguessedLetters(word).isEmpty
 	}
 
 	private func displayResults() {

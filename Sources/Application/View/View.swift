@@ -21,7 +21,7 @@ public class View: Viewable {
 	public func receiveGuess() -> Guess {
 		var guess = Guess(currentGuess: io.getUserInput())
 		while !(guess.isValid()) {
-			io.display("Invalid guess. Please enter a lowercase letter or word.")
+			io.display("Invalid guess. Please enter letter, word or phrase.")
 			guess = Guess(currentGuess: io.getUserInput())
 		}
 		return guess
@@ -30,10 +30,11 @@ public class View: Viewable {
 	public func displayBlanks(gameWord: String, correctGuesses: [String]) {
 		var blanks: [String] = []
 		let letters = gameWord.characters.map { String($0) }
-
 		for letter in letters {
 			if (correctGuesses.contains(letter)) {
 				blanks.append(letter)
+			} else if (letter == " ") {
+				blanks.append(" ")
 			} else {
 				blanks.append("__ ")
 			}

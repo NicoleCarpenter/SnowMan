@@ -6,7 +6,7 @@ public class Guess {
 	}
 
 	public func isValid() -> Bool {
-		return currentGuess != "" && hasOnlyLetters()
+		return !(isSpaceOrReturn()) && hasOnlyLetters()
 	}
 
 	public func isCorrect(word: String) -> Bool {
@@ -22,19 +22,26 @@ public class Guess {
 	}
 
 	public func isCorrectlyGuessedFullWord(word: String) -> Bool {
-		return currentGuess == word
+		return currentGuess.lowercaseString == word.lowercaseString
 	}
 
 	private func hasGuessInWord(word: String) -> Bool {
-		return word.lowercaseString.characters.contains(Character(currentGuess))
+		return word.lowercaseString.characters.contains(Character(currentGuess.lowercaseString))
 	}
 
 	private func hasOnlyLetters() -> Bool {
-   		for character in currentGuess.characters {
-  			if (!(character >= "a" && character <= "z")) {
+		for character in currentGuess.characters {
+			if (!isValidLetter(character)) {
 				return false
-  			}
-   		}
-   		return true
+			}
+		}
+		return true
+	}
+	private func isSpaceOrReturn() -> Bool {
+		return currentGuess == "" || currentGuess == " "
+	}
+
+	private func isValidLetter(letter: Character) -> Bool {
+		return (letter >= "a" && letter <= "z") || (letter >= "A" && letter <= "Z") || letter == " "
 	}
 }
