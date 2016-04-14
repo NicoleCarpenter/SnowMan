@@ -3,14 +3,16 @@ public class Game {
 	let guessManager: GuessManager
 	let view: Viewable
 	let maxNumberOfGuesses: Int
+	let guessBuilder: GuessBuilder
 	public var gameOver: Bool
 	public var winner: Bool
 
-	public init(word: String, guessManager: GuessManager, view: Viewable, maxNumberOfGuesses: Int) {
+	public init(word: String, guessManager: GuessManager, view: Viewable, maxNumberOfGuesses: Int, guessBuilder: GuessBuilder) {
 		self.word = word
 		self.guessManager = guessManager
 		self.view = view
 		self.maxNumberOfGuesses = maxNumberOfGuesses
+		self.guessBuilder = guessBuilder
 		gameOver = false
 		winner = false
 	}
@@ -39,7 +41,7 @@ public class Game {
 
 	private func playerTurn() {
 		view.displayBlanks(word, correctGuesses: guessManager.correctGuesses)
-		let guess = view.receiveGuess()
+		let guess = guessBuilder.buildGuess(view.receiveGuess())
 		guessManager.appendGuess(word, guess: guess)
 		let remainingGuesses = guessManager.calculateRemainingGuesses(maxNumberOfGuesses)
 		let incorrectGuesses = guessManager.incorrectGuesses

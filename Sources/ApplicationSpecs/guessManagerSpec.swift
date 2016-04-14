@@ -85,11 +85,13 @@ class GuessManagerSpec: Swiftest.Spec {
 				let guess = Guess(currentGuess: "apple")
 				guessManager.appendGuess(word, guess: guess)
 				expect(guessManager.correctGuesses).to.contain(guess.currentGuess)
+				expect(guessManager.incorrectGuesses).notTo.contain(guess.currentGuess)
 			}
 
-			it("should not add word to incorrectGuesses if it is a correctly guessed word") {
-				let guess = Guess(currentGuess: "apple")
+			it("should add word to correctGuesses if it is a correctly guessed word, regardless of case") {
+				let guess = Guess(currentGuess: "APPLE")
 				guessManager.appendGuess(word, guess: guess)
+				expect(guessManager.correctGuesses).to.contain(guess.currentGuess)
 				expect(guessManager.incorrectGuesses).notTo.contain(guess.currentGuess)
 			}
 
@@ -97,11 +99,6 @@ class GuessManagerSpec: Swiftest.Spec {
 				let guess = Guess(currentGuess: "banana")
 				guessManager.appendGuess(word, guess: guess)
 				expect(guessManager.incorrectGuesses).to.contain(guess.currentGuess)
-			}
-
-			it("should not add word to correctGuesses if it is an incorrectly guessed word") {
-				let guess = Guess(currentGuess: "banana")
-				guessManager.appendGuess(word, guess: guess)
 				expect(guessManager.correctGuesses).notTo.contain(guess.currentGuess)
 			}
 
@@ -109,18 +106,14 @@ class GuessManagerSpec: Swiftest.Spec {
 				let guess = Guess(currentGuess: "a")
 				guessManager.appendGuess(word, guess: guess)
 				expect(guessManager.correctGuesses).to.contain(guess.currentGuess)
-			}
-
-			it("should not add guess to incorrectGuesses collection if it is in the word") {
-				let guess = Guess(currentGuess: "a")
-				guessManager.appendGuess(word, guess: guess)
 				expect(guessManager.incorrectGuesses).notTo.contain(guess.currentGuess)
 			}
 
-			it("should add guess to incorrectGuesses collection if it is not in the word") {
-				let guess = Guess(currentGuess: "b")
+			it("should add guess to correctGuesses collection if it is in the word") {
+				let guess = Guess(currentGuess: "A")
 				guessManager.appendGuess(word, guess: guess)
-				expect(guessManager.incorrectGuesses).to.contain(guess.currentGuess)
+				expect(guessManager.correctGuesses).to.contain(guess.currentGuess)
+				expect(guessManager.incorrectGuesses).notTo.contain(guess.currentGuess)
 			}
 
 			it("should not add guess to correctGuesses collection if it is not in the word") {
