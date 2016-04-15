@@ -16,6 +16,7 @@ public class Game {
 	}
 
 	public func playGame() {
+		initialScreenView()
 		while (!gameOver) {
 			playerTurn()
 		}
@@ -32,12 +33,22 @@ public class Game {
 		return winner
 	}
 
-	private func playerTurn() {		
-		view.assignBlanks(word, correctGuesses: guessManager.correctGuesses)
+	private func initialScreenView() {
+		view.clearScreen()
+		view.displayImage(snowManImage, remainingGuesses: maxNumberOfGuesses, maxNumberOfGuesses: maxNumberOfGuesses)
+	}
+
+	private func playerTurn() {
+		view.displayBlanks(word, correctGuesses: guessManager.correctGuesses)
+
 		let guess = view.receiveGuess()
 		guessManager.appendGuess(word, guess: guess)
+		let remainingGuesses = guessManager.calculateRemainingGuesses(maxNumberOfGuesses)
 		let incorrectGuesses = guessManager.incorrectGuesses
-		view.displayRemainingGuesses(guessManager.calculateRemainingGuesses(maxNumberOfGuesses))
+
+		view.clearScreen()
+		view.displayImage(snowManImage, remainingGuesses: remainingGuesses, maxNumberOfGuesses: maxNumberOfGuesses)
+		view.displayRemainingGuesses(remainingGuesses)
 		view.displayIncorrectGuesses(incorrectGuesses)
 		isGameOver(guess)
 	}

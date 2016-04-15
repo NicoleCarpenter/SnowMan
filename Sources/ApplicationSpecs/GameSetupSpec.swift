@@ -16,6 +16,10 @@ class GameSetupSpec: Swiftest.Spec {
 				gameSetup.getMaxNumberOfGuesses()
 			}
 
+			it("should clear the screen") {
+				expect(view.clearScreenCalled).to.equal(true)
+			}
+
 			it("should display a prompt to the user") {
 				expect(view.promptMaxNumberOfGuessesCalled).to.equal(true)
 			}
