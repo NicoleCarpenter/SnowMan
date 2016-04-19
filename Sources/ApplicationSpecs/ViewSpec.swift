@@ -14,7 +14,6 @@ class ViewSpec: Swiftest.Spec {
       it("should print a prompt requesting number of guesses") {
         let outputToPrint = "How many guesses do you want to have for this game?"
         view.promptMaxNumberOfGuesses()
-
         expect(io.displayCalled).to.equal(true)
         expect(io.getPrintedOutputStream).to.equal(outputToPrint)
       }
@@ -76,18 +75,32 @@ class ViewSpec: Swiftest.Spec {
     }
 
     describe("#receiveGuess") {
+      it("should return the user input if it is a single letter") {
+        io.stubbedUserInput = ["a"]
+        let guess = view.receiveGuess()
+        expect(io.displayCalled).to.equal(false)
+        expect(guess.currentGuess).to.equal("a")
+      }
+
       it("should return the user input if it is a string of letters") {
         io.stubbedUserInput = ["hello"]
         let guess = view.receiveGuess()
         expect(io.displayCalled).to.equal(false)
         expect(guess.currentGuess).to.equal("hello")
-    }
+      }
 
       it("should return the user input if it is a single letter") {
         io.stubbedUserInput = ["a"]
         let guess = view.receiveGuess()
         expect(io.displayCalled).to.equal(false)
         expect(guess.currentGuess).to.equal("a")
+      }
+
+      it("should return the user input if it is a valid phrase") {
+        io.stubbedUserInput = ["hello world"]
+        let guess = view.receiveGuess()
+        expect(io.displayCalled).to.equal(false)
+        expect(guess.currentGuess).to.equal("hello world")
       }
 
       it("should return an error message if the user input is a number") {
@@ -117,7 +130,22 @@ class ViewSpec: Swiftest.Spec {
         expect(io.displayCalled).to.equal(true)
         expect(guess.currentGuess).to.equal("fail")
       }
+
+      it("should return an error message if the user hits space as the only character") {
+        io.stubbedUserInput = [" ", "fail"]
+        let guess = view.receiveGuess()
+        expect(io.displayCalled).to.equal(true)
+        expect(guess.currentGuess).to.equal("fail")
+      }
+
+      it("should return an error message if the user input is a phrase with invalid characters") {
+        io.stubbedUserInput = ["hello world!", "h3llo world", "fail"]
+        let guess = view.receiveGuess()
+        expect(io.displayCalled).to.equal(true)
+        expect(guess.currentGuess).to.equal("fail")
+      }
     }
+
 
     describe("#displayBlanks") {
       var gameWord: String!
@@ -185,7 +213,6 @@ class ViewSpec: Swiftest.Spec {
         expect(io.displayCalled).to.equal(true)
         expect(io.getPrintedOutputStream).to.equal(image.last!)
       }
-
     }
 
     describe("#displayRemainingGuesses") {
