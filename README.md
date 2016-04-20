@@ -35,5 +35,6 @@ swift build
 To run all tests in the application, run the command 
 ```swift
 .build/debug/WordListSpecs
+.build/debug/SetUpSpecs
 .build/debug/ApplicationSpecs
 ``` 

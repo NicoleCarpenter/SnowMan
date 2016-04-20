@@ -7,6 +7,31 @@ public class View: Viewable {
 		self.validator = CharacterValidator()
 	}
 
+	public func promptNumberOfPlayers(options: [String]) {
+		io.display("How many players are playing this round?")
+		for option in options {
+			io.display("\(option)")
+		}
+	}
+
+	public func receiveSelectionType(numberOfOptions: Int) -> Int{
+		var selectionType = io.getUserInput()
+		while (selectionType == "" || !(validSelection(selectionType, numberOfOptions: numberOfOptions))) {
+			io.display("Invalid selection.")
+			selectionType = io.getUserInput()
+		}
+		return Int(selectionType)!
+	}
+
+	public func promptReceivePlayerName() {
+		io.display("What is your name?")
+	}
+
+	public func receivePlayerName() -> String {
+		promptReceivePlayerName()
+		return io.getUserInput()
+	}
+
 	public func promptMaxNumberOfGuesses() {
 		io.display("How many guesses do you want to have for this game?")
 	}
@@ -20,19 +45,11 @@ public class View: Viewable {
 		return Int(maxNumberOfGuesses)!
 	}
 
-	public func promptWordSelectionType() {
+	public func promptWordSelectionType(options: [String]) {
 		io.display("Would you like a randomly selected word or phrase, or would you like a friend to select one?")
-		io.display("[1] Random")
-		io.display("[2] Select")
-	}
-
-	public func receiveSelectionType(numberOfOptions: Int) -> Int{
-		var selectionType = io.getUserInput()
-		while (selectionType == "" || !(validSelection(selectionType, numberOfOptions: numberOfOptions))) {
-			io.display("Invalid selection.")
-			selectionType = io.getUserInput()
+		for option in options {
+			io.display("\(option)")
 		}
-		return Int(selectionType)!
 	}
 
 	public func promptReceiveWord() {
@@ -84,6 +101,10 @@ public class View: Viewable {
 
 		displayBlanks(blanks)
 		displayImageLines(image)
+	}
+
+	public func promptPlayerTurn(name: String) {
+		io.display("\(name), it's your turn!")
 	}
 
 	public func displayRemainingGuesses(remainingGuesses: Int) {

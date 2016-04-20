@@ -78,8 +78,9 @@ class ViewSpec: Swiftest.Spec {
 
 		describe("#promptWordSelectionType") {
 			it("should print a prompt requesting type of word selection") {
+				let options = ["[1] Random", "[2] Select"]
 				let outputToPrint = "[2] Select"
-				view.promptWordSelectionType()
+				view.promptWordSelectionType(options)
 
 				expect(io.displayCalled).to.equal(true)
 				expect(io.getPrintedOutputStream).to.equal(outputToPrint)
@@ -152,12 +153,12 @@ class ViewSpec: Swiftest.Spec {
 				expect(word).to.equal("Hello")
 			}
 
-            it("should return the user input if it is a valid phrase") {
-                io.stubbedUserInput = ["hello world"]
-                let word = view.receiveWord()
-                expect(io.displayCalled).to.equal(false)
-                expect(word).to.equal("hello world")
-            }
+			it("should return the user input if it is a valid phrase") {
+				io.stubbedUserInput = ["hello world"]
+				let word = view.receiveWord()
+				expect(io.displayCalled).to.equal(false)
+				expect(word).to.equal("hello world")
+			}
 
 			it("should return the user input if it is a single letter") {
 				io.stubbedUserInput = ["a"]
@@ -202,7 +203,7 @@ class ViewSpec: Swiftest.Spec {
 			}
 		}
 
-        describe("#receiveGuess") {
+		describe("#receiveGuess") {
 			it("should return the user input if it is a single letter") {
 				io.stubbedUserInput = ["a"]
 				let guess = view.receiveGuess()
@@ -210,19 +211,19 @@ class ViewSpec: Swiftest.Spec {
 				expect(guess).to.equal("a")
 			}
 
-            it("should return the user input if it is a string of letters") {
-                io.stubbedUserInput = ["hello"]
-                let guess = view.receiveGuess()
-                expect(io.displayCalled).to.equal(false)
-                expect(guess).to.equal("hello")
-            }
+			it("should return the user input if it is a string of letters") {
+				io.stubbedUserInput = ["hello"]
+				let guess = view.receiveGuess()
+				expect(io.displayCalled).to.equal(false)
+				expect(guess).to.equal("hello")
+			}
 
-            it("should return the user input if it is a valid phrase") {
-                io.stubbedUserInput = ["hello world"]
-                let guess = view.receiveGuess()
-                expect(io.displayCalled).to.equal(false)
-                expect(guess).to.equal("hello world")
-            }
+			it("should return the user input if it is a valid phrase") {
+				io.stubbedUserInput = ["hello world"]
+				let guess = view.receiveGuess()
+				expect(io.displayCalled).to.equal(false)
+				expect(guess).to.equal("hello world")
+			}
 
 			it("should return an error message if the user input is a number") {
 				io.stubbedUserInput = ["1", "fail"]
@@ -252,19 +253,19 @@ class ViewSpec: Swiftest.Spec {
 				expect(guess).to.equal("fail")
 			}
 
-            it("should return an error message if the user hits space as the only character") {
-                io.stubbedUserInput = [" ", "fail"]
-                let guess = view.receiveGuess()
-                expect(io.displayCalled).to.equal(true)
-                expect(guess).to.equal("fail")
-            }
+			it("should return an error message if the user hits space as the only character") {
+				io.stubbedUserInput = [" ", "fail"]
+				let guess = view.receiveGuess()
+				expect(io.displayCalled).to.equal(true)
+				expect(guess).to.equal("fail")
+			}
 
-            it("should return an error message if the user input is a phrase with invalid characters") {
-                io.stubbedUserInput = ["hello world!", "h3llo world", "fail"]
-                let guess = view.receiveGuess()
-                expect(io.displayCalled).to.equal(true)
-                expect(guess).to.equal("fail")
-            }
+			it("should return an error message if the user input is a phrase with invalid characters") {
+				io.stubbedUserInput = ["hello world!", "h3llo world", "fail"]
+				let guess = view.receiveGuess()
+				expect(io.displayCalled).to.equal(true)
+				expect(guess).to.equal("fail")
+			}
 		}
 
 		describe("#displayBlanks") {
@@ -298,42 +299,42 @@ class ViewSpec: Swiftest.Spec {
 			}
 		}
 
-        describe("#displayImage") {
-            var image: [String]!
-            before() {
-                image = [
-                    " .-.  .-.,",
-                    "|   \\/   |,",
-                    "\\        /,",
-                    "`\\    /`,",
-                    "  `\\/`"
-                ]
-            }
+		describe("#displayImage") {
+			var image: [String]!
+			before() {
+				image = [
+					" .-.  .-.,",
+					"|   \\/   |,",
+					"\\        /,",
+					"`\\    /`,",
+					"  `\\/`"
+				]
+			}
 
-            it("should print the top line of the image if only 1 guess remains and guesses equals image lines") {
-                let remainingGuesses = 1
-                let maxNumberOfGuesses = 5
-                view.displayImage(image, remainingGuesses: remainingGuesses, maxNumberOfGuesses: maxNumberOfGuesses)
-                expect(io.displayCalled).to.equal(true)
-                expect(io.getPrintedOutputStream).to.equal(image.first!)
-            }
+			it("should print the top line of the image if only 1 guess remains and guesses equals image lines") {
+				let remainingGuesses = 1
+				let maxNumberOfGuesses = 5
+				view.displayImage(image, remainingGuesses: remainingGuesses, maxNumberOfGuesses: maxNumberOfGuesses)
+				expect(io.displayCalled).to.equal(true)
+				expect(io.getPrintedOutputStream).to.equal(image.first!)
+			}
 
-            it("should print the second line of the image if only 1 guess remains and guesses equals image lines") {
-                let remainingGuesses = 1
-                let maxNumberOfGuesses = 4
-                view.displayImage(image, remainingGuesses: remainingGuesses, maxNumberOfGuesses: maxNumberOfGuesses)
-                expect(io.displayCalled).to.equal(true)
-                expect(io.getPrintedOutputStream).to.equal(image[1])
-            }
+			it("should print the second line of the image if only 1 guess remains and guesses equals image lines") {
+				let remainingGuesses = 1
+				let maxNumberOfGuesses = 4
+				view.displayImage(image, remainingGuesses: remainingGuesses, maxNumberOfGuesses: maxNumberOfGuesses)
+				expect(io.displayCalled).to.equal(true)
+				expect(io.getPrintedOutputStream).to.equal(image[1])
+			}
 
-            it("should print the bottom line of the image if remaining guesses equals image lines") {
-                let remainingGuesses = 5
-                let maxNumberOfGuesses = 5
-                view.displayImage(image, remainingGuesses: remainingGuesses, maxNumberOfGuesses: maxNumberOfGuesses)
-                expect(io.displayCalled).to.equal(true)
-                expect(io.getPrintedOutputStream).to.equal(image.last!)
-            }
-        }
+			it("should print the bottom line of the image if remaining guesses equals image lines") {
+				let remainingGuesses = 5
+				let maxNumberOfGuesses = 5
+				view.displayImage(image, remainingGuesses: remainingGuesses, maxNumberOfGuesses: maxNumberOfGuesses)
+				expect(io.displayCalled).to.equal(true)
+				expect(io.getPrintedOutputStream).to.equal(image.last!)
+			}
+		}
 
 		describe("#displayRemainingGuesses") {
 			it("should return the number of guesses remaining") {
@@ -387,11 +388,11 @@ class ViewSpec: Swiftest.Spec {
 			}
 		}
 
-        describe("#clearScreen") {
-            it("should clear the screen") {
-                view.clearScreen()
-                expect(io.clearCalled).to.equal(true)
-            }
-        }
+		describe("#clearScreen") {
+			it("should clear the screen") {
+				view.clearScreen()
+				expect(io.clearCalled).to.equal(true)
+			}
+		}
 	}
 }

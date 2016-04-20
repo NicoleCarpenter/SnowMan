@@ -1,10 +1,14 @@
 public class MockView: Viewable {
-	public var promptMaxNumberOfGuessesCalled: Bool
-	public var receiveMaxNumberOfGuessesCalled: Bool
-	public var promptWordSelectionTypeCalled: Bool
+	public var promptNumberOfPlayersCalled: Bool
 	public var receiveSelectionTypeCalled: Bool
+	public var promptReceivePlayerNameCalled: Bool
+	public var receivePlayerNameCalled: Bool
+	public var promptWordSelectionTypeCalled: Bool
 	public var promptReceiveWordCalled: Bool
 	public var receiveWordCalled: Bool
+	public var promptMaxNumberOfGuessesCalled: Bool
+	public var receiveMaxNumberOfGuessesCalled: Bool
+	public var promptPlayerTurnCalled: Bool
 	public var receiveGuessCalled: Bool
 	public var displayImageCalled: Bool
 	public var displayBlanksCalled: Bool
@@ -13,18 +17,23 @@ public class MockView: Viewable {
 	public var displayWinningMessageCalled: Bool
 	public var displayLosingMessageCalled: Bool
 	public var clearScreenCalled: Bool
+	public var receivePlayerNameReturn: String!
 	public var receiveMaxNumberOfGuessesReturn: Int!
 	public var receiveSelectionTypeReturn: Int!
 	public var receiveWordReturn: String!
 	public var receiveGuessReturn: String!
 
 	public init() {
-		promptMaxNumberOfGuessesCalled = false
-		receiveMaxNumberOfGuessesCalled = false
-		promptWordSelectionTypeCalled = false
+		promptNumberOfPlayersCalled = false
 		receiveSelectionTypeCalled = false
+		promptReceivePlayerNameCalled = false
+		receivePlayerNameCalled = false
+		promptWordSelectionTypeCalled = false
 		promptReceiveWordCalled = false
 		receiveWordCalled = false
+		promptMaxNumberOfGuessesCalled = false
+		receiveMaxNumberOfGuessesCalled = false
+		promptPlayerTurnCalled = false
 		receiveGuessCalled = false
 		displayImageCalled = false
 		displayBlanksCalled = false
@@ -33,6 +42,49 @@ public class MockView: Viewable {
 		displayWinningMessageCalled = false
 		displayLosingMessageCalled = false
 		clearScreenCalled = true
+	}
+
+	public func promptNumberOfPlayers(options: [String]) {
+		self.promptNumberOfPlayersCalled = true
+	}
+
+	public func receiveSelectionType(numberOfOptions: Int) -> Int {
+		receiveSelectionTypeCalled = true
+		return receiveSelectionTypeReturn
+	}
+
+	public func stubReceiveSelectionType(receiveSelectionTypeReturn: String) {
+		self.receiveSelectionTypeReturn = Int(receiveSelectionTypeReturn)
+	}
+
+	public func promptReceivePlayerName() {
+		self.promptReceivePlayerNameCalled = true
+	}
+
+	public func receivePlayerName() -> String {
+		receivePlayerNameCalled = true
+		return receivePlayerNameReturn
+	}
+
+	public func stubReceivePlayerName(receivePlayerNameReturn: String) {
+		self.receivePlayerNameReturn = receivePlayerNameReturn
+	}
+
+	public func promptWordSelectionType(options: [String]) {
+		promptWordSelectionTypeCalled = true
+	}
+
+	public func promptReceiveWord() {
+		promptReceiveWordCalled = true
+	}
+
+	public func receiveWord() -> String {
+		receiveWordCalled = true
+		return receiveWordReturn
+	}
+
+	public func stubReceiveWord(receiveWordReturn: String) {
+		self.receiveWordReturn = receiveWordReturn
 	}
 
 	public func promptMaxNumberOfGuesses() {
@@ -48,30 +100,8 @@ public class MockView: Viewable {
 		self.receiveMaxNumberOfGuessesReturn = Int(receiveMaxNumberOfGuessesReturn)
 	}
 
-	public func promptWordSelectionType() {
-		promptWordSelectionTypeCalled = true
-	}
-
-	public func receiveSelectionType(numberOfOptions: Int) -> Int {
-		receiveSelectionTypeCalled = true
-		return receiveSelectionTypeReturn
-	}
-
-	public func stubReceiveSelectionType(receiveSelectionTypeReturn: String) {
-		self.receiveSelectionTypeReturn = Int(receiveSelectionTypeReturn)
-	}
-
-	public func promptReceiveWord() {
-		promptReceiveWordCalled = true
-	}
-
-	public func receiveWord() -> String {
-		receiveWordCalled = true
-		return receiveWordReturn
-	}
-
-	public func stubReceiveWord(receiveWordReturn: String) {
-		self.receiveWordReturn = receiveWordReturn
+	public func promptPlayerTurn(name: String) {
+		self.promptPlayerTurnCalled = true
 	}
 
 	public func receiveGuess() -> String {
