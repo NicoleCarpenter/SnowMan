@@ -1,18 +1,23 @@
 import Application
 import WordList
+import SetUp
 
-let dictionaryManager = DictionaryManager(words: WordList.words)
-let word = dictionaryManager.getRandomWord()
+let wordListManager = WordListManager(words: WordList.words)
+let word = wordListManager.getRandomWord()
 
 let io = IO()
-
-let view = View(io: io)
+let validator = CharacterValidator()
+let view = View(io: io, validator: validator)
 
 let guessManager = GuessManager()
 
-let gameSetup = GameSetup(view: view)
-let maxNumberOfGuesses = gameSetup.getMaxNumberOfGuesses()
+let wordBuilder = WordBuilder()
+let gameSetup = GameSetup(view: view, wordListManager: wordListManager, wordBuilder: wordBuilder)
 
-let game = Game(word: word, guessManager: guessManager, view: view, maxNumberOfGuesses: maxNumberOfGuesses)
+let maxNumberOfGuesses = gameSetup.getMaxNumberOfGuesses()
+let gameWord = gameSetup.assignGameWord()
+let guessBuilder = GuessBuilder()
+
+let game = Game(word: gameWord.gameWord, guessManager: guessManager, view: view, maxNumberOfGuesses: maxNumberOfGuesses, guessBuilder: guessBuilder)
 
 game.playGame()

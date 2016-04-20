@@ -8,4 +8,5 @@ before_install:
 script:
   - swift build
   - .build/debug/WordListSpecs
+  - .build/debug/SetUpSpecs
   - .build/debug/ApplicationSpecs

@@ -1,8 +1,10 @@
 public class View: Viewable {
 	var io: Interactable
+	var validator: CharacterValidator
 
-	public init(io: Interactable) {
+	public init(io: Interactable, validator: CharacterValidator) {
 		self.io = io
+		self.validator = CharacterValidator()
 	}
 
 	public func promptMaxNumberOfGuesses() {
@@ -18,11 +20,39 @@ public class View: Viewable {
 		return Int(maxNumberOfGuesses)!
 	}
 
-	public func receiveGuess() -> Guess {
-		var guess = Guess(currentGuess: io.getUserInput())
-		while !(guess.isValid()) {
-			io.display("Invalid guess. Please enter letter, word or phrase.")
-			guess = Guess(currentGuess: io.getUserInput())
+	public func promptWordSelectionType() {
+		io.display("Would you like a randomly selected word or phrase, or would you like a friend to select one?")
+		io.display("[1] Random")
+		io.display("[2] Select")
+	}
+
+	public func receiveSelectionType(numberOfOptions: Int) -> Int{
+		var selectionType = io.getUserInput()
+		while (selectionType == "" || !(validSelection(selectionType, numberOfOptions: numberOfOptions))) {
+			io.display("Invalid selection.")
+			selectionType = io.getUserInput()
+		}
+		return Int(selectionType)!
+	}
+
+	public func promptReceiveWord() {
+		io.display("What is your word?")
+	}
+
+	public func receiveWord() -> String {
+		var word = io.getUserInput()
+		while !(validator.hasOnlyLetters(word)) || validator.isCarraigeReturnOrSpace(word) {
+			io.display("Invalid word. Please enter a valid word that does not contain numbers or symbols.")
+			word = io.getUserInput()
+		}
+		return word
+	}
+
+	public func receiveGuess() -> String {
+		var guess = io.getUserInput()
+		while !(validator.hasOnlyLetters(guess)) || validator.isCarraigeReturnOrSpace(guess) {
+			io.display("Invalid guess. Please enter a letter or word.")
+			guess = io.getUserInput()
 		}
 		return guess
 	}
@@ -108,5 +138,9 @@ public class View: Viewable {
 		for line in image {
 			io.display(line)
 		}
+	}
+
+	private func validSelection(input: String, numberOfOptions: Int) -> Bool {
+		return Int(input) != nil && Int(input) > 0 && Int(input) <= numberOfOptions
 	}
 }

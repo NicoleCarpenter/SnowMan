@@ -7,6 +7,7 @@ class GameSpec: Swiftest.Spec {
 		var word: String!
 		var view: MockView!
 		var maxNumberOfGuesses: Int!
+		var guessBuilder: GuessBuilder!
 		var game: Game!
 
 		before() {
@@ -14,7 +15,8 @@ class GameSpec: Swiftest.Spec {
 			word = "apple"
 			view = MockView()
 			maxNumberOfGuesses = 5
-			game = Game(word: word, guessManager: guessManager, view: view, maxNumberOfGuesses: maxNumberOfGuesses)
+			guessBuilder = GuessBuilder()
+			game = Game(word: word, guessManager: guessManager, view: view, maxNumberOfGuesses: maxNumberOfGuesses, guessBuilder: guessBuilder)
 		}
 
 		describe("#playGame") {
@@ -29,7 +31,7 @@ class GameSpec: Swiftest.Spec {
 				expect(view.displayIncorrectGuessesCalled).to.equal(true)
 				expect(view.displayWinningMessageCalled).to.equal(true)
 				expect(view.displayLosingMessageCalled).to.equal(false)
-				expect(view.receiveGuessReturn).to.equal(Guess(currentGuess: "apple"))
+				expect(view.receiveGuessReturn).to.equal("apple")
 				expect(game.winner).to.equal(true)
 				expect(game.gameOver).to.equal(true)
 			}
@@ -45,7 +47,7 @@ class GameSpec: Swiftest.Spec {
 				expect(view.displayIncorrectGuessesCalled).to.equal(true)
 				expect(view.displayWinningMessageCalled).to.equal(false)
 				expect(view.displayLosingMessageCalled).to.equal(true)
-				expect(view.receiveGuessReturn).to.equal(Guess(currentGuess: "b"))
+				expect(view.receiveGuessReturn).to.equal("b")
 				expect(game.winner).to.equal(false)
 				expect(game.gameOver).to.equal(true)
 			}
@@ -73,21 +75,21 @@ class GameSpec: Swiftest.Spec {
 			}
 			it("should return true if the final letter is guessed") {
 				guessManager.correctGuesses = ["a", "p", "l", "e"]
-				let guess = Guess(currentGuess: "x")
+				let guess = guessBuilder.buildGuess("x")
 				game.isGameOver(guess)
 				expect(game.gameOver).to.equal(true)
 			}
 
 			it("should return true if the full word is guessed") {
 				guessManager.correctGuesses = ["a", "p", "l"]
-				let guess = Guess(currentGuess: "apple")
+				let guess = guessBuilder.buildGuess("apple")
 				game.isGameOver(guess)
 				expect(game.gameOver).to.equal(true)
 			}
 
 			it("should return true if no remaining guesses are left") {
 				guessManager.incorrectGuesses = ["c", "b", "d", "f", "g"]
-				let guess = Guess(currentGuess: "x")
+				let guess = guessBuilder.buildGuess("x")
 				game.isGameOver(guess)
 				expect(game.gameOver).to.equal(true)
 			}
@@ -95,7 +97,7 @@ class GameSpec: Swiftest.Spec {
 			it("should return false if there is not a winner and there are remaining guesses") {
 				guessManager.correctGuesses = ["a"]
 				guessManager.incorrectGuesses = ["b"]
-				let guess = Guess(currentGuess: "x")
+				let guess = guessBuilder.buildGuess("x")
 				game.isGameOver(guess)
 				expect(game.gameOver).to.equal(false)
 			}
@@ -104,14 +106,14 @@ class GameSpec: Swiftest.Spec {
 		describe("#isWinner") {
 			it("should return true if winning condition is met") {
 				guessManager.correctGuesses = ["a", "p", "l", "e"]
-				let guess = Guess(currentGuess: "x")
+				let guess = guessBuilder.buildGuess("x")
 				game.isWinner(guess)
 				expect(game.winner).to.equal(true)
 			}
 
 			it("should return false if winning condition is not met") {
 				guessManager.correctGuesses = ["a", "p"]
-				let guess = Guess(currentGuess: "x")
+				let guess = guessBuilder.buildGuess("x")
 				game.isWinner(guess)
 				expect(game.winner).to.equal(false)
 			}

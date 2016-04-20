@@ -1,7 +1,7 @@
 import Swiftest
 
 Swiftest.register([
-  	WordListManagerSpec.self
+  GameSetupSpec.self
 ])
 
 try Swiftest.run()

@@ -1,6 +1,10 @@
 public class MockView: Viewable {
 	public var promptMaxNumberOfGuessesCalled: Bool
 	public var receiveMaxNumberOfGuessesCalled: Bool
+	public var promptWordSelectionTypeCalled: Bool
+	public var receiveSelectionTypeCalled: Bool
+	public var promptReceiveWordCalled: Bool
+	public var receiveWordCalled: Bool
 	public var receiveGuessCalled: Bool
 	public var displayImageCalled: Bool
 	public var displayBlanksCalled: Bool
@@ -10,11 +14,17 @@ public class MockView: Viewable {
 	public var displayLosingMessageCalled: Bool
 	public var clearScreenCalled: Bool
 	public var receiveMaxNumberOfGuessesReturn: Int!
-	public var receiveGuessReturn: Guess!
+	public var receiveSelectionTypeReturn: Int!
+	public var receiveWordReturn: String!
+	public var receiveGuessReturn: String!
 
 	public init() {
 		promptMaxNumberOfGuessesCalled = false
 		receiveMaxNumberOfGuessesCalled = false
+		promptWordSelectionTypeCalled = false
+		receiveSelectionTypeCalled = false
+		promptReceiveWordCalled = false
+		receiveWordCalled = false
 		receiveGuessCalled = false
 		displayImageCalled = false
 		displayBlanksCalled = false
@@ -38,13 +48,39 @@ public class MockView: Viewable {
 		self.receiveMaxNumberOfGuessesReturn = Int(receiveMaxNumberOfGuessesReturn)
 	}
 
-	public func receiveGuess() -> Guess {
+	public func promptWordSelectionType() {
+		promptWordSelectionTypeCalled = true
+	}
+
+	public func receiveSelectionType(numberOfOptions: Int) -> Int {
+		receiveSelectionTypeCalled = true
+		return receiveSelectionTypeReturn
+	}
+
+	public func stubReceiveSelectionType(receiveSelectionTypeReturn: String) {
+		self.receiveSelectionTypeReturn = Int(receiveSelectionTypeReturn)
+	}
+
+	public func promptReceiveWord() {
+		promptReceiveWordCalled = true
+	}
+
+	public func receiveWord() -> String {
+		receiveWordCalled = true
+		return receiveWordReturn
+	}
+
+	public func stubReceiveWord(receiveWordReturn: String) {
+		self.receiveWordReturn = receiveWordReturn
+	}
+
+	public func receiveGuess() -> String {
 		receiveGuessCalled = true
 		return receiveGuessReturn
 	}
 
 	public func stubReceiveGuess(receiveGuessReturn: String) {
-		self.receiveGuessReturn = Guess(currentGuess: receiveGuessReturn)
+		self.receiveGuessReturn = receiveGuessReturn
 	}
 
 	public func displayImage(image: [String], remainingGuesses: Int, maxNumberOfGuesses: Int) {

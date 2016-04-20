@@ -3,29 +3,6 @@ import Swiftest
 
 class GuessSpec: Swiftest.Spec {
 	let spec = describe("guess logic") {
-		describe("#isValid") {
-			it("should return true if valid") {
-				var guess = Guess(currentGuess: "a")
-				expect(guess.isValid()).to.equal(true)
-
-				guess = Guess(currentGuess: "apple")
-				expect(guess.isValid()).to.equal(true)
-			}
-
-			it("should return false if invalid because guess is empty string") {
-				let guess = Guess(currentGuess: "")
-				expect(guess.isValid()).to.equal(false)
-			}
-
-			it("should return false if invalid because guess contains non-letter characters") {
-				var guess = Guess(currentGuess: "1")
-				expect(guess.isValid()).to.equal(false)
-
-				guess = Guess(currentGuess: "!")
-				expect(guess.isValid()).to.equal(false)
-			}
-		}
-
 		describe("#isCorrect") {
 			var word: String!
 			before() {
@@ -44,6 +21,11 @@ class GuessSpec: Swiftest.Spec {
 
 			it("should return true if a letter guess is in the game word") {
 				let guess = Guess(currentGuess: "a")
+				expect(guess.isCorrect(word)).to.equal(true)
+			}
+
+			it("should return true if a letter guess is in the game word regardless of case") {
+				let guess = Guess(currentGuess: "A")
 				expect(guess.isCorrect(word)).to.equal(true)
 			}
 
@@ -89,6 +71,14 @@ class GuessSpec: Swiftest.Spec {
 			it("should return false if the guess is incorrect") {
 				let guess = Guess(currentGuess: "banana")
 				expect(guess.isCorrectlyGuessedFullWord(word)).to.equal(false)
+			}
+
+			it("should return true if full word is guessed regardless of case") {
+				var guess = Guess(currentGuess: "APPLE")
+				expect(guess.isCorrectlyGuessedFullWord(word)).to.equal(true)
+
+				guess = Guess(currentGuess: "ApPlE")
+				expect(guess.isCorrectlyGuessedFullWord(word)).to.equal(true)
 			}
 		}
 	}
